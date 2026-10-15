@@ -100,23 +100,58 @@ function rebase(d: Row, sub: string): Row {
   return d;
 }
 
-// ---------------------------------------------------------------- ekip yönergeleri (Claude her incelemede uyar)
-const DEFAULT_GUIDELINES = [
-  "Normal olmayan, alışılmadık HER eylem tehlikeli olabilir ve çocuklara kötü örnek olur; bunları inanılmaz ısrarcı şekilde denetle. "
-  + "Örnek: \"yangın tüpünü fark eder ve panzehiri yangın tüpünün içine sıkarak yanına alır\". Nesnelerin amacı dışında kullanılması, "
-  + "maddelerin karıştırılması/sıkılması/içilmesi, güvenlik ekipmanlarıyla oynanması, bilinmeyen bitki-meyve-sıvının yenmesi/içilmesi, "
-  + "elektrik hattına dokunulması gibi her durumu işaretle (ciddiyet: yuksek). Şüphede kalırsan işaretle ve sahnenin amacını koruyan "
-  + "güvenli bir eylem öner.",
-];
-export function getGuidelines(): string[] {
-  const r = get("SELECT value FROM meta WHERE key='yonergeler'");
-  return r ? JSON.parse(r.value) : DEFAULT_GUIDELINES;
+// ---------------------------------------------------------------- AI notları
+// scope: "yer"     -> senaryoda belirli bir kısım için not (doc_id + paragraph + start/end + quote)
+//        "senaryo" -> o senaryonun tamamı için not (doc_id)
+//        "genel"   -> Geliştir sekmesindeki güncellemeler (yönerge, karakter bilgisi, üslup…)
+// learn=1: sonraki senaryo incelemelerinde de Claude'a verilir. Genel notlarda "AI'da kullan" anlamına gelir.
+db.exec(`CREATE TABLE IF NOT EXISTS notes (id TEXT PRIMARY KEY, scope TEXT NOT NULL, kind TEXT NOT NULL DEFAULT 'not',
+  doc_id TEXT, paragraph INTEGER, start INTEGER, end INTEGER, quote TEXT NOT NULL DEFAULT '', text TEXT NOT NULL,
+  author TEXT NOT NULL DEFAULT '', learn INTEGER NOT NULL DEFAULT 1, status TEXT NOT NULL DEFAULT 'acik',
+  created_at TEXT NOT NULL, updated_at TEXT NOT NULL);
+CREATE INDEX IF NOT EXISTS idx_notes_doc ON notes(doc_id);`);
+
+const DEFAULT_GUIDELINE = "Normal olmayan, alışılmadık HER eylem tehlikeli olabilir ve çocuklara kötü örnek olur; bunları inanılmaz ısrarcı "
+  + "şekilde denetle. Örnek: \"yangın tüpünü fark eder ve panzehiri yangın tüpünün içine sıkarak yanına alır\". Nesnelerin amacı dışında "
+  + "kullanılması, maddelerin karıştırılması/sıkılması/içilmesi, güvenlik ekipmanlarıyla oynanması, bilinmeyen bitki-meyve-sıvının "
+  + "yenmesi/içilmesi, elektrik hattına dokunulması gibi her durumu işaretle (ciddiyet: yuksek). Şüphede kalırsan işaretle ve sahnenin "
+  + "amacını koruyan güvenli bir eylem öner.";
+// Eski "ekip yönergeleri" (meta) bir kez Geliştir güncellemelerine taşınır
+if (!get("SELECT 1 FROM meta WHERE key='notlar_tasindi'")) {
+  const old = get("SELECT value FROM meta WHERE key='yonergeler'");
+  for (const t of old ? (JSON.parse(old.value) as string[]) : [DEFAULT_GUIDELINE]) {
+    run(`INSERT INTO notes (id, scope, kind, text, author, learn, created_at, updated_at) VALUES (?,?,?,?,?,1,?,?)`,
+      newId(), "genel", "yönerge", t, "Ekip", now(), now());
+  }
+  run("INSERT OR REPLACE INTO meta (key, value) VALUES ('notlar_tasindi', '1')");
 }
-export function setGuidelines(items: string[]) {
-  const clean = items.map((s) => String(s).trim()).filter(Boolean);
-  run("INSERT OR REPLACE INTO meta (key, value) VALUES ('yonergeler', ?)", J(clean));
-  return clean;
+
+const noteRow = (r: Row): Row => ({ ...r, learn: !!r.learn });
+export function addNote(n: { scope: string; text: string; kind?: string; doc_id?: string | null; paragraph?: number | null;
+  start?: number | null; end?: number | null; quote?: string; author?: string; learn?: boolean }) {
+  const id = newId();
+  run(`INSERT INTO notes (id, scope, kind, doc_id, paragraph, start, end, quote, text, author, learn, created_at, updated_at)
+       VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)`, id, n.scope, n.kind ?? "not", n.doc_id ?? null, n.paragraph ?? null, n.start ?? null,
+    n.end ?? null, n.quote ?? "", n.text.trim(), n.author ?? defaultUser(), n.learn === false ? 0 : 1, now(), now());
+  return getNote(id)!;
 }
+export const getNote = (id: string) => { const r = get("SELECT * FROM notes WHERE id=?", id); return r ? noteRow(r) : null; };
+export function listNotes(o: { doc_id?: string; scope?: string; learnOnly?: boolean } = {}) {
+  const w: string[] = [], p: any[] = [];
+  if (o.doc_id) { w.push("doc_id=?"); p.push(o.doc_id); }
+  if (o.scope) { w.push("scope=?"); p.push(o.scope); }
+  if (o.learnOnly) w.push("learn=1");
+  return all(`SELECT n.*, d.name AS doc_name FROM notes n LEFT JOIN documents d ON d.id=n.doc_id${w.length ? " WHERE " + w.map((x) => "n." + x).join(" AND ") : ""}
+    ORDER BY n.created_at DESC`, ...p).map(noteRow);
+}
+export function updateNote(id: string, f: Row) {
+  for (const k of ["text", "kind", "status"]) if (typeof f[k] === "string") run(`UPDATE notes SET ${k}=?, updated_at=? WHERE id=?`, f[k], now(), id);
+  if (typeof f.learn === "boolean") run("UPDATE notes SET learn=?, updated_at=? WHERE id=?", f.learn ? 1 : 0, now(), id);
+  return getNote(id);
+}
+export const deleteNote = (id: string) => run("DELETE FROM notes WHERE id=?", id);
+/** Claude'un her incelemede uyduğu ekip güncellemeleri (Geliştir sekmesi, "AI'da kullan" açık olanlar). */
+export const getGuidelines = () => listNotes({ scope: "genel", learnOnly: true }).reverse();
 
 // ---------------------------------------------------------------- üyeler
 export function touchMember(name: string) {
@@ -206,6 +241,7 @@ export function updateDocument(id: string, f: Row) {
 export function deleteDocument(id: string) {
   const d = getDocument(id);
   run("DELETE FROM findings WHERE doc_id=?", id);
+  run("DELETE FROM notes WHERE doc_id=? AND learn=0", id); // öğrenmede kullanılan notlar belge silinse de kalır
   run("DELETE FROM documents WHERE id=?", id);
   if (d) fs.rmSync(d.stored_path, { force: true });
 }

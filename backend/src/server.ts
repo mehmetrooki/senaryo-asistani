@@ -184,9 +184,25 @@ app.post("/api/lessons/:id/rule", async (req: any) => {
     source: "ogrenilen", status: "aktif", example: l.old_text.slice(0, 300), lesson_id: l.id });
 });
 
-// ---------------------------------------------------------------- ekip yönergeleri
-app.get("/api/yonergeler", async () => db.getGuidelines());
-app.put("/api/yonergeler", async (req: any) => db.setGuidelines(Array.isArray(req.body?.items) ? req.body.items : []));
+// ---------------------------------------------------------------- AI notları ve Geliştir güncellemeleri
+app.get("/api/notes", async (req: any) => db.listNotes({ doc_id: req.query.doc_id, scope: req.query.scope }));
+app.post("/api/notes", async (req: any) => {
+  const b = req.body ?? {}, text = String(b.text ?? "").trim();
+  if (!text) throw fail(400, "Not boş olamaz");
+  if (!["yer", "senaryo", "genel"].includes(b.scope)) throw fail(400, "Geçersiz not türü");
+  let quote = "";
+  if (b.scope === "yer") {
+    const t = (await readTexts(docOr404(b.doc_id).stored_path))[b.paragraph];
+    if (t === undefined || !(0 <= b.start && b.start < b.end && b.end <= t.length)) throw fail(400, "Geçersiz seçim");
+    quote = t.slice(b.start, b.end);
+  } else if (b.scope === "senaryo") docOr404(b.doc_id);
+  return db.addNote({ ...b, text, quote, author: user(req), learn: b.learn !== false });
+});
+app.patch("/api/notes/:id", async (req: any) => db.updateNote(req.params.id, req.body ?? {}) ?? (() => { throw fail(404, "Not yok"); })());
+app.delete("/api/notes/:id", async (req: any) => (db.deleteNote(req.params.id), { ok: true }));
+app.post("/api/notes/:id/apply", async (req: any) => {
+  try { return await svc.applyNote(req.params.id); } catch (e: any) { throw fail(400, e.message); }
+});
 
 // ---------------------------------------------------------------- kurallar
 app.get("/api/rules", async () => db.listRules());

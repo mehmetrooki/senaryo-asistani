@@ -4,7 +4,7 @@ import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { api } from "@/lib/api";
 
-const NAV = [["/", "Senaryo Geliştirme"], ["/bellek/", "Bellek"], ["/kurallar/", "Kurallar & Öğrenilenler"], ["/export/", "Export"], ["/ayarlar/", "Ayarlar"]];
+const NAV = [["/", "Senaryo Geliştirme"], ["/bellek/", "Bellek"], ["/gelistir/", "Geliştir"], ["/kurallar/", "Kurallar & Öğrenilenler"], ["/export/", "Export"], ["/ayarlar/", "Ayarlar"]];
 
 export default function Header() {
   const path = usePathname();

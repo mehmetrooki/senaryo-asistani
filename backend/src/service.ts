@@ -2,7 +2,7 @@
 import path from "node:path";
 import { DATA_DIR, loadConfig } from "./config.js";
 import * as db from "./db.js";
-import { aiReady, analyze } from "./ai.js";
+import { aiReady, analyze, applyNote as aiApplyNote } from "./ai.js";
 import { applyChanges, readTexts, smartRemovalRange, trackedChangeVersions } from "./docx.js";
 import { pairsBetweenVersions, pairsToRules, similarity, suggestionIndex, suggestionsFor } from "./memory.js";
 import { diffPairs, matchCase, scanParagraph, type Pair } from "./text.js";
@@ -51,7 +51,7 @@ export async function scanRules(docId: string) {
 export async function scanAi(docId: string, progress?: (d: number, t: number) => void) {
   const doc = db.getDocument(docId)!, texts = await readTexts(doc.stored_path);
   db.clearFindings(docId, "ai");
-  const found = await analyze(texts, progress);
+  const found = await analyze(texts, progress, db.listNotes({ doc_id: docId }));
   for (const f of found) db.addFinding(docId, f.paragraph, f.start, f.end, f.original, f.suggestions, { category: f.category, reason: f.reason, severity: f.severity, source: "ai" });
   return found.length;
 }
@@ -167,4 +167,21 @@ export async function exportDoc(docId: string, tracked = false, dest?: string) {
   const out = dest ?? path.join(DATA_DIR, "exports", `${stem}${tracked ? "_revize_izlenen" : "_revize"}.docx`);
   const r = await applyChanges(doc.stored_path, out, db.listFindings(docId, "kabul"), tracked, loadConfig().author || "Senaryo Asistanı");
   return { ...r, path: out, pending: db.listFindings(docId, "bekliyor").length };
+}
+
+/** Yere yazılmış bir notu Claude'a uygulatır: o kısım için önerili bir bulgu oluşturur. */
+export async function applyNote(noteId: string) {
+  const note = db.getNote(noteId);
+  if (!note || note.scope !== "yer" || !note.doc_id) throw new Error("Yalnızca senaryoda bir yere yazılmış notlar uygulanabilir");
+  if (!aiReady()) throw new Error("Claude bağlantısı yok. Ayarlar'dan API anahtarı ekleyin ya da notu Claude Desktop'tan (MCP) uygulatın.");
+  const doc = db.getDocument(note.doc_id)!, texts = await readTexts(doc.stored_path), para = texts[note.paragraph] ?? "";
+  const ctx = texts.slice(Math.max(0, note.paragraph - 4), note.paragraph + 5).filter((t) => t.trim()).join("\n");
+  const r = await aiApplyNote(note, para, ctx);
+  if (!r) throw new Error("Claude bir öneri üretemedi");
+  let s = r.quote ? para.indexOf(r.quote) : -1, e = s + r.quote.length;
+  if (s < 0) { s = note.start ?? 0; e = note.end ?? para.length; } // bulunamazsa editörün seçtiği aralık
+  const f = db.addFinding(doc.id, note.paragraph, s, e, para.slice(s, e), r.suggestions,
+    { category: "editör notu", reason: `Not: ${note.text}${r.reason ? " — " + r.reason : ""}`, severity: "orta", source: "not" });
+  db.updateNote(note.id, { status: "uygulandi" });
+  return f;
 }

@@ -37,6 +37,8 @@ export default function Gelistirme() {
   const [over, setOver] = useState(false);
   const [pop, setPop] = useState<{ id: string; top: number; left: number } | null>(null);
   const [editing, setEditing] = useState<number | null>(null);
+  const [notes, setNotes] = useState<any[]>([]);
+  const [notePop, setNotePop] = useState<{ x: number; y: number; paragraph: number; start: number; end: number; quote: string } | null>(null);
   const [selBtn, setSelBtn] = useState<{ x: number; y: number; paragraph: number; start: number; end: number } | null>(null);
   const colRef = useRef<HTMLDivElement>(null), fileRef = useRef<HTMLInputElement>(null);
   const curRef = useRef(cur); curRef.current = cur;
@@ -48,7 +50,8 @@ export default function Gelistirme() {
     return d;
   }, []);
   const loadDetail = useCallback(async (id = curRef.current) => {
-    if (!id) return setDetail(null);
+    if (!id) { setNotes([]); return setDetail(null); }
+    api<any[]>(`/api/notes?doc_id=${id}`).then(setNotes).catch(() => {});
     try { setDetail(await api(`/api/docs/${id}`)); } catch { setCur(null); setDetail(null); }
   }, []);
 
@@ -145,7 +148,7 @@ export default function Gelistirme() {
   function onMouseUp() {
     setTimeout(() => {
       const s = window.getSelection();
-      if (mode !== "isaretli" || editing !== null || pop || !s?.rangeCount || s.isCollapsed) return setSelBtn(null);
+      if (mode !== "isaretli" || editing !== null || pop || notePop || !s?.rangeCount || s.isCollapsed) return setSelBtn(null);
       const range = s.getRangeAt(0), pEl = range.startContainer.parentElement?.closest("#paper p") as HTMLElement | null;
       if (!pEl || pEl !== range.endContainer.parentElement?.closest("#paper p")) return setSelBtn(null);
       const pre = document.createRange(); pre.selectNodeContents(pEl); pre.setEnd(range.startContainer, range.startOffset);
@@ -170,6 +173,16 @@ export default function Gelistirme() {
   const pending = findings.filter((f) => f.status === "bekliyor").length;
   const texts: Record<number, string> = Object.fromEntries((detail?.paragraphs ?? []).map((p: any) => [p.index, p.text]));
   const popF = pop && findings.find((f) => f.id === pop.id);
+  const noteCount: Record<number, number> = {};
+  notes.filter((n) => n.scope === "yer" && n.status !== "cozuldu").forEach((n) => (noteCount[n.paragraph] = (noteCount[n.paragraph] ?? 0) + 1));
+  const gotoParagraph = (i: number) => {
+    setMode("isaretli");
+    requestAnimationFrame(() => {
+      const el = document.querySelector(`#paper p[data-p="${i}"]`);
+      el?.scrollIntoView({ behavior: "smooth", block: "center" });
+      if (el) { el.classList.remove("flash"); void (el as HTMLElement).offsetWidth; el.classList.add("flash"); }
+    });
+  };
 
   return (
     <section className="view active" id="view-dev">
@@ -251,7 +264,8 @@ export default function Gelistirme() {
                   }} />;
                   return <p key={p.index} data-p={p.index} className={p.text ? "" : "empty"} style={style}
                     onDoubleClick={(e) => { if (!(e.target as Element).closest("mark")) { window.getSelection()?.removeAllRanges(); setSelBtn(null); setPop(null); setEditing(p.index); } }}>
-                    {paraNodes(p)}</p>;
+                    {paraNodes(p)}{noteCount[p.index] ? <span className="note-badge" title="Bu paragrafta AI notu var"
+                      onClick={(e) => { e.stopPropagation(); setFilter("notlar"); }}>📝 {noteCount[p.index]}</span> : null}</p>;
                 })}
               </article>
               {popF && pop && (
@@ -262,7 +276,24 @@ export default function Gelistirme() {
               )}
             </div>
           )}
-          {selBtn && <button className="primary selbtn" style={{ display: "block", left: selBtn.x, top: selBtn.y }} onMouseDown={(e) => e.preventDefault()} onClick={markSelection}>Bu kısmı işaretle</button>}
+          {selBtn && (
+            <div className="selbtns" style={{ left: selBtn.x, top: selBtn.y }}>
+              <button className="primary" onMouseDown={(e) => e.preventDefault()} onClick={markSelection}>Bu kısmı işaretle</button>
+              <button onMouseDown={(e) => e.preventDefault()} title="Bu kısım için yapay zekâya not yazın"
+                onClick={() => { const b = selBtn; setSelBtn(null); setNotePop({ ...b, quote: texts[b.paragraph].slice(b.start, b.end) }); }}>📝 AI notu</button>
+            </div>)}
+          {notePop && (
+            <div className="notepop" style={{ left: Math.max(8, Math.min(notePop.x, window.innerWidth - 400)), top: Math.min(notePop.y, window.innerHeight - 260) }}
+              onClick={(e) => e.stopPropagation()}>
+              <NoteComposer quote={notePop.quote} placeholder="Bu kısım için AI'a notunuz (ör. Burada Keday çok sert konuşuyor, yumuşat)"
+                onCancel={() => setNotePop(null)} onSave={async (text, learn) => {
+                  try {
+                    await api("/api/notes", { json: { scope: "yer", doc_id: cur, paragraph: notePop.paragraph, start: notePop.start, end: notePop.end, text, learn } });
+                    setNotePop(null); window.getSelection()?.removeAllRanges(); setFilter("notlar"); toast("Not kaydedildi");
+                    loadDetail();
+                  } catch (e: any) { toast(e.message); }
+                }} />
+            </div>)}
         </section>
 
         {/* ---------------- sağ: öneriler */}
@@ -271,7 +302,7 @@ export default function Gelistirme() {
             <div className="row"><h3>Öneriler</h3><span className="badge">{detail ? `${pending} bekleyen / ${findings.length}` : ""}</span></div>
             <div className="row">
               <div className="seg">
-                {[["bekliyor", "Bekleyen"], ["kabul", "Kabul"], ["tum", "Tümü"]].map(([k, l]) => <button key={k} className={filter === k ? "on" : ""} onClick={() => setFilter(k)}>{l}</button>)}
+                {[["bekliyor", "Bekleyen"], ["kabul", "Kabul"], ["tum", "Tümü"], ["notlar", `Notlar${notes.length ? ` (${notes.filter((n) => n.status !== "cozuldu").length})` : ""}`]].map(([k, l]) => <button key={k} className={filter === k ? "on" : ""} onClick={() => setFilter(k)}>{l}</button>)}
               </div>
               <button title="Bekleyen her öneri için ilk seçeneği uygular" onClick={async () => {
                 if (!cur || !confirm("Bekleyen tüm öneriler için ilk seçenek uygulanacak. Devam edilsin mi?")) return;
@@ -280,10 +311,12 @@ export default function Gelistirme() {
             </div>
           </div>
           <div className="cards">
+            {filter === "notlar" ? (detail ? <NotesPanel notes={notes} docId={cur!} onGoto={gotoParagraph} onChanged={refresh} /> : null) : <>
             {detail && !list.length && <div className="empty-state" style={{ marginTop: 40 }}>{isBusy ? "İnceleme sürüyor…"
               : filter === "bekliyor" ? <><h3>Bekleyen öneri yok</h3>Bu senaryoda işaretlenecek başka bir şey bulunmadı.</> : "Kayıt yok."}</div>}
             {list.map((f) => <Card key={f.id} f={f} text={texts[f.paragraph] ?? ""} focus={focus === f.id} onGoto={() => gotoFinding(f)}
               onDecide={(b) => decide(f.id, b)} onAlt={async () => { try { await api(`/api/findings/${f.id}/alternatives`, { method: "POST" }); } catch (e: any) { toast(e.message); } refresh(); }} />)}
+            </>}
           </div>
         </aside>
       </div>
@@ -359,4 +392,55 @@ function ParaEditor({ p, style, onDone }: { p: any; style: React.CSSProperties; 
         <span>Ctrl+Enter kaydeder · Esc vazgeçer · yalnızca değiştirdiğiniz kelimeler işlenir, biçim korunur</span></span>
     </p>
   );
+}
+
+function NoteComposer({ quote, placeholder, onSave, onCancel }: { quote?: string; placeholder: string; onSave: (text: string, learn: boolean) => void; onCancel?: () => void }) {
+  const [text, setText] = useState(""), [learn, setLearn] = useState(true);
+  return (
+    <div className="composer">
+      {quote && <div className="anchor" style={{ margin: 0 }}>«{quote}»</div>}
+      <textarea autoFocus value={text} placeholder={placeholder} onChange={(e) => setText(e.target.value)}
+        onKeyDown={(e) => { if (e.key === "Enter" && (e.ctrlKey || e.metaKey) && text.trim()) { onSave(text, learn); setText(""); } if (e.key === "Escape") onCancel?.(); }} />
+      <div className="row">
+        <label className="grow" title="İşaretliyse bu not sonraki senaryoların incelemesinde de Claude'a verilir">
+          <input type="checkbox" checked={learn} onChange={(e) => setLearn(e.target.checked)} /> Sonraki incelemelerde de dikkate al</label>
+        {onCancel && <button className="ghost" onClick={onCancel}>Vazgeç</button>}
+        <button className="primary" disabled={!text.trim()} onClick={() => { onSave(text, learn); setText(""); }}>Kaydet</button>
+      </div>
+    </div>
+  );
+}
+
+function NotesPanel({ notes, docId, onGoto, onChanged }: { notes: any[]; docId: string; onGoto: (p: number) => void; onChanged: () => void }) {
+  const [busyId, setBusyId] = useState<string | null>(null);
+  const patch = async (n: any, body: any) => { await api(`/api/notes/${n.id}`, { method: "PATCH", json: body }); onChanged(); };
+  const sorted = [...notes].sort((a, b) => Number(a.status === "cozuldu") - Number(b.status === "cozuldu") || (a.paragraph ?? -1) - (b.paragraph ?? -1));
+  return <>
+    <div className="reason" style={{ margin: "2px 2px 0" }}>Bu senaryo için AI'a not yazın. Senaryoda bir kısmı seçip <b>📝 AI notu</b> ile o yere de not
+      bırakabilirsiniz. Claude bu senaryoyu incelerken notları uygular; "sonraki incelemelerde de dikkate al" işaretliyse yeni senaryolarda da.</div>
+    <NoteComposer placeholder="Bu senaryonun geneli için not (ör. Bu bölümde Keday küçük kardeşine bakıyor; sabırlı ve sevecen olmalı)"
+      onSave={async (text, learn) => { try { await api("/api/notes", { json: { scope: "senaryo", doc_id: docId, text, learn } }); toast("Not kaydedildi"); onChanged(); } catch (e: any) { toast(e.message); } }} />
+    {sorted.map((n) => (
+      <div key={n.id} className={`notecard ${n.status}`}>
+        <div className="meta">
+          <span className="badge info">{n.scope === "yer" ? `¶ ${n.paragraph + 1}` : "Senaryonun geneli"}</span>
+          {n.status === "uygulandi" && <span className="badge ok">Claude önerisi oluşturuldu</span>}
+          {n.status === "cozuldu" && <span className="badge">Çözüldü</span>}
+          <span>👤 {n.author} · {n.created_at.replace("T", " ").slice(0, 16)}</span>
+        </div>
+        {n.quote && <div className="qt" title="Senaryoda bu kısma git" onClick={() => onGoto(n.paragraph)}>«{n.quote}»</div>}
+        <div className="txt">{n.text}</div>
+        <label style={{ fontSize: 12.5, color: "var(--muted)" }}><input type="checkbox" checked={n.learn} onChange={(e) => patch(n, { learn: e.target.checked })} /> Sonraki incelemelerde de dikkate al</label>
+        <div className="actions">
+          {n.scope === "yer" && n.status !== "cozuldu" && <button disabled={busyId === n.id} onClick={async () => {
+            setBusyId(n.id);
+            try { await api(`/api/notes/${n.id}/apply`, { method: "POST" }); toast("Claude notu uyguladı; öneri Bekleyen sekmesinde."); onChanged(); }
+            catch (e: any) { toast(e.message, 5000); }
+            setBusyId(null);
+          }}>{busyId === n.id ? "Claude uyguluyor…" : "✦ Claude'a uygulat"}</button>}
+          <button className="ghost" onClick={() => patch(n, { status: n.status === "cozuldu" ? "acik" : "cozuldu" })}>{n.status === "cozuldu" ? "Yeniden aç" : "Çözüldü"}</button>
+          <button className="ghost" onClick={async () => { if (confirm("Bu not silinsin mi?")) { await api(`/api/notes/${n.id}`, { method: "DELETE" }); onChanged(); } }}>Sil</button>
+        </div>
+      </div>))}
+  </>;
 }

@@ -49,8 +49,11 @@ function houseExamples(limit = 60) {
 export function buildSystem() {
   const blocks: any[] = [{ type: "text", text: data.systemPrompt }], extra: string[] = [];
   const ex = houseExamples(), lessons = promptExamples(), rules = db.getGuidelines();
-  if (rules.length) extra.push("EKİP YÖNERGELERİ — kesin talimatlar; her incelemede uygula, bunlara giren her durumu ısrarla işaretle:\n"
-    + rules.map((r) => "- " + r).join("\n"));
+  if (rules.length) extra.push("EKİP YÖNERGELERİ VE GÜNCELLEMELERİ (Geliştir sekmesi) — kesin talimatlar; her incelemede uygula, "
+    + "bunlara giren her durumu ısrarla işaretle:\n" + rules.map((r) => `- [${r.kind}] ${r.text}`).join("\n"));
+  const learned = db.listNotes({ learnOnly: true }).filter((n) => n.scope !== "genel").slice(0, 120);
+  if (learned.length) extra.push("EDİTÖR NOTLARI — editörlerin önceki senaryolara yazdığı notlar. Yeni senaryolarda benzer durumları aynı "
+    + "hassasiyetle işaretle:\n" + learned.map((n) => `- ${n.quote ? `«${n.quote.slice(0, 200)}» → ` : "(senaryonun geneli) "}${n.text}`).join("\n"));
   if (ex) extra.push("Ekibin kural listesi (bu ifadeler görüldüğünde benzer öneriler ver):\n" + ex);
   if (lessons) extra.push("BELLEK — ekibin geçmiş senaryolara düştüğü notlar ve yaptığı düzeltmeler. Yeni senaryoda aynı türden "
     + "durumları aynı hassasiyetle işaretle; bölüme özgü notları (ör. belirli bir karakterin adı) genelleme:\n\n" + lessons);
@@ -78,18 +81,25 @@ const toSugg = (items: any[]) => items.map((it) => typeof it === "string" ? { te
   : { text: it.text ?? "", kaynak: it.kaynak === "bellek" ? "bellek" : "claude", ref: it.kaynak === "bellek" ? it.ref ?? "" : "" });
 
 /** Senaryonun tamamı her istekte (önbellekli) verilir; her istekte küçük bir aralık ayrıntılı incelenir. */
-export async function analyze(texts: string[], progress?: (d: number, t: number) => void) {
+export async function analyze(texts: string[], progress?: (d: number, t: number) => void, docNotes: any[] = []) {
   const system = buildSystem(), paras = texts.map((t, i) => [i, t] as const).filter(([, t]) => t.trim());
   const chunks: (typeof paras)[] = [];
   let cur: typeof paras = [], size = 0;
   for (const p of paras) { if (cur.length && size + p[1].length > 9000) { chunks.push(cur); cur = []; size = 0; } cur.push(p); size += p[1].length + 10; }
   if (cur.length) chunks.push(cur);
   const script = { type: "text", text: "<senaryo>\n" + paras.map(([i, t]) => `[${i}] ${t}`).join("\n") + "\n</senaryo>", cache_control: { type: "ephemeral" } };
+  const general = docNotes.filter((n) => n.scope === "senaryo" && n.status !== "cozuldu");
+  const notesFor = (a: number, b: number) => {
+    const local = docNotes.filter((n) => n.scope === "yer" && n.status !== "cozuldu" && n.paragraph >= a && n.paragraph <= b);
+    const lines = [...general.map((n) => `- (senaryonun geneli) ${n.text}`), ...local.map((n) => `- [${n.paragraph}] «${n.quote}»: ${n.text}`)];
+    return lines.length ? "\n\nEDİTÖRÜN BU SENARYO İÇİN NOTLARI — mutlaka uygula; yere yazılan her not için o kısımda bir bulgu üret ve "
+      + "notun istediğini karşılayan öneriler ver:\n" + lines.join("\n") : "";
+  };
   const run = (c: typeof paras) => callJson(system, [script, { type: "text", text:
     `Yukarıdaki senaryonun YALNIZCA [${c[0][0]}] ile [${c.at(-1)![0]}] arasındaki paragraflarını ayrıntılı incele (sahne bağlamı için `
     + "senaryonun geri kalanına bakabilirsin). Paragraf başındaki [sayı] paragraf numarasıdır; bulgularda bu numarayı kullan. "
     + "Bu aralıkta bulduğun her sorunu ve iyileştirme fırsatını listele. EKİP YÖNERGELERİ'ne giren hiçbir durumu atlama; "
-    + "özellikle normal olmayan, taklit edilebilir her eylemi tek tek kontrol et." }], SCHEMA, 64000, "high").then((r) => r ?? { findings: [] });
+    + "özellikle normal olmayan, taklit edilebilir her eylemi tek tek kontrol et." + notesFor(c[0][0], c.at(-1)![0]) }], SCHEMA, 64000, "high").then((r) => r ?? { findings: [] });
   const results: any[] = [];
   let done = 0;
   const tick = () => progress?.(++done, chunks.length);
@@ -115,4 +125,17 @@ export async function alternatives(original: string, paragraph: string, reason =
     + "düzeltme varsa birini ona dayandır (kaynak 'bellek'); diğerleri hikâyeyi bozmadan sahneyi tamamlayan kendi önerilerin olsun (kaynak 'yeni').";
   const r = await callJson(buildSystem(), user, ALT_SCHEMA, 8000);
   return toSugg(r?.suggestions ?? []).filter((s) => !existing.includes(s.text));
+}
+
+const NOTE_SCHEMA = {
+  type: "object", additionalProperties: false, required: ["quote", "reason", "suggestions"],
+  properties: { quote: { type: "string" }, reason: { type: "string" }, suggestions: SUGG },
+};
+/** Editörün yere yazdığı notu uygular: değişmesi gereken en kısa parçayı ve notu karşılayan önerileri döndürür. */
+export async function applyNote(note: any, paragraph: string, context: string) {
+  const user = `Senaryodan bağlam:\n${context}\n\nDüzenlenecek paragraf: ${paragraph}\nEditörün işaretlediği kısım: «${note.quote}»\n`
+    + `Editörün notu: ${note.text}\n\nNotu uygula: paragraftan HARFİ HARFİNE kopyalanmış, değişmesi gereken en kısa parçayı "quote" olarak ver; `
+    + "yerine yazılacak, notu karşılayan ve hikâyeyi bozmayan 1-3 öneri üret; 'reason' kısa Türkçe açıklama olsun.";
+  const r = await callJson(buildSystem(), user, NOTE_SCHEMA, 8000);
+  return r ? { quote: String(r.quote ?? ""), reason: String(r.reason ?? ""), suggestions: toSugg(r.suggestions ?? []) } : null;
 }

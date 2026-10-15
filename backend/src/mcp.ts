@@ -51,7 +51,9 @@ export function createMcpServer(user = "Claude") {
   tool("senaryo_metni", "Senaryonun paragraflarını numaralarıyla verir (bulgu_ekle'de bu numaralar kullanılır).",
     { belge_id: z.string().optional(), baslangic: z.number().int().optional(), adet: z.number().int().optional() }, async (a) => {
       const d = docOrLatest(a.belge_id), t = await readTexts(d.stored_path), b = a.baslangic ?? 0;
-      return { belge_id: d.id, ad: d.name, toplam_paragraf: t.length,
+      const notlar = db.listNotes({ doc_id: d.id }).filter((n) => n.status !== "cozuldu")
+        .map((n) => ({ kapsam: n.scope, paragraf: n.paragraph, alinti: n.quote, metin: n.text }));
+      return { belge_id: d.id, ad: d.name, toplam_paragraf: t.length, editor_notlari: notlar,
         paragraflar: t.map((metin, paragraf) => ({ paragraf, metin })).filter((p) => p.metin.trim()).slice(b, b + (a.adet ?? 400)) };
     });
   tool("bulgulari_listele", "Bir belgedeki öneriler. durum: bekliyor | kabul | red | tum",
@@ -108,6 +110,26 @@ export function createMcpServer(user = "Claude") {
     if (a.claude_api_ile && aiReady()) n += await svc.scanAi(d.id);
     return { belge_id: d.id, bulgu: n, bulgular: db.listFindings(d.id).map(view) };
   });
+  tool("not_ekle", "AI notu yazar. kapsam: 'yer' (senaryoda bir kısım: belge_id + paragraf + alinti), 'senaryo' (o senaryonun "
+    + "geneli: belge_id) ya da 'genel' (Geliştir sekmesi güncellemesi: yönerge/karakter/üslup bilgisi). ogren=true ise sonraki incelemelerde de kullanılır.",
+    { kapsam: z.enum(["yer", "senaryo", "genel"]), metin: z.string(), belge_id: z.string().optional(), paragraf: z.number().int().optional(),
+      alinti: z.string().optional(), tur: z.string().optional(), ogren: z.boolean().optional() }, async (a) => {
+      let start: any = null, end: any = null, quote = "", doc: any = null;
+      if (a.kapsam !== "genel") doc = docOrLatest(a.belge_id);
+      if (a.kapsam === "yer") {
+        const t = (await readTexts(doc.stored_path))[a.paragraf ?? -1];
+        if (t === undefined) throw new Error("Paragraf numarası geçersiz");
+        start = a.alinti ? t.indexOf(a.alinti) : 0;
+        if (start < 0) throw new Error("Alıntı paragrafta bulunamadı");
+        end = a.alinti ? start + a.alinti.length : t.length; quote = t.slice(start, end);
+      }
+      return db.addNote({ scope: a.kapsam, kind: a.tur ?? (a.kapsam === "genel" ? "yönerge" : "not"), text: a.metin, doc_id: doc?.id ?? null,
+        paragraph: a.kapsam === "yer" ? a.paragraf! : null, start, end, quote, author: user, learn: a.ogren !== false });
+    });
+  tool("notlari_listele", "AI notları: belge_id verilirse o senaryonun notları, verilmezse tümü (Geliştir güncellemeleri dahil). "
+    + "İncelemede o senaryonun notlarını mutlaka uygula.", { belge_id: z.string().optional() },
+    (a) => db.listNotes({ doc_id: a.belge_id }).map((n) => ({ not_id: n.id, kapsam: n.scope, tur: n.kind, senaryo: n.doc_name, paragraf: n.paragraph,
+      alinti: n.quote, metin: n.text, yazan: n.author, ogren: n.learn, durum: n.status })));
   tool("bellege_yukle", "Ekibin notlu ('-commented') senaryolarını ve son hâllerini belleğe ekler; klasör yolu da verilebilir.",
     { dosya_yollari: z.array(z.string()) }, async (a) => {
       const files = a.dosya_yollari.flatMap((p: string) => {

@@ -191,3 +191,21 @@ pre{background:var(--panel-2);border:1px solid var(--line);border-radius:8px;pad
 .login .err{color:var(--bad);font-size:13.5px;min-height:1em}
 .login .sub{margin:0 0 4px;color:var(--muted);font-size:13.5px}
 .view{display:flex}
+
+/* AI notları */
+.note-badge{display:inline-block;margin-left:6px;font-family:-apple-system,"Segoe UI",sans-serif;font-size:11px;padding:0 6px;border-radius:999px;background:var(--accent-soft);color:var(--accent);cursor:pointer;vertical-align:middle;user-select:none}
+.notecard{border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:12px;padding:10px 12px;background:var(--panel-2);display:flex;flex-direction:column;gap:6px}
+.notecard.cozuldu{opacity:.6}
+.notecard .meta{display:flex;gap:6px;flex-wrap:wrap;align-items:center;font-size:12px;color:var(--muted)}
+.notecard .qt{font-family:"Courier New",monospace;font-size:13px;background:var(--panel);border-radius:4px;padding:4px 8px;cursor:pointer}
+.notecard .txt{white-space:pre-wrap}
+.notecard .actions{display:flex;gap:6px;flex-wrap:wrap}
+.composer{display:flex;flex-direction:column;gap:6px;border:1px dashed var(--line);border-radius:12px;padding:10px;background:var(--panel)}
+.composer textarea{width:100%;min-height:54px;resize:vertical}
+.composer .row{display:flex;gap:8px;align-items:center;flex-wrap:wrap;font-size:12.5px;color:var(--muted)}
+.composer .row .grow{flex:1}
+.notepop{position:fixed;z-index:40;width:min(380px,92vw);background:var(--panel);border:1px solid var(--accent);border-radius:12px;box-shadow:0 8px 30px rgba(0,0,0,.18);padding:10px}
+.selbtns{position:fixed;z-index:20;display:flex;gap:6px}
+.feed{display:flex;flex-direction:column;gap:10px}
+.right-head .row{flex-wrap:wrap;row-gap:8px}
+.right-head .seg button{padding:5px 10px}

@@ -62,6 +62,12 @@ eski-python/  önceki Python sürümü (yalnızca başvuru için)
 - **Senaryo Geliştirme:** .docx bırakın; kurallar + Bellek + (varsa) Claude tarar. Karttaki alıntıya
   tıklayınca senaryoda o kısma gidilir ve yerinde düzenlenir; paragrafa çift tıklayıp kendiniz yazabilirsiniz.
   Öneriler kaynağıyla gelir: **Bellek · bölüm**, **Claude**, **Kural**.
+- **AI notları:** Senaryoda bir kısmı seçip **📝 AI notu** ile o yere not yazın (ör. "Burada Keday çok sert konuşuyor,
+  yumuşat") ya da sağdaki **Notlar** sekmesinden senaryonun geneline not bırakın. Claude bu senaryoyu incelerken notları uygular;
+  yere yazılan notu **✦ Claude'a uygulat** ile hemen öneriye çevirebilirsiniz. "Sonraki incelemelerde de dikkate al" işaretli
+  notlar yeni senaryoların incelemesinde de kullanılır.
+- **Geliştir:** Yapay zekâya ekip güncellemeleri yazın (yönerge, karakter bilgisi, üslup, yasaklı/tercih edilen ifade…).
+  Claude her incelemede bunlara kesin talimat olarak uyar; "AI'da kullan" kutusuyla açıp kapatabilirsiniz.
 - **Bellek:** `-commented` notlu senaryolar + son hâlleri; notlar, işaretlenen kısım ve ekibin düzeltmesiyle
   öğrenilir. Yanlış çıkarılan düzeltmeyi satıra tıklayıp kendiniz yazabilirsiniz.
 - **Kurallar:** hazır setler (yabancı kelime, fazlalık, kötü örnek davranış kalıpları, argo, yazım, ha/he/be),

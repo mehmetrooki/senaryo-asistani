@@ -3,3 +3,7 @@ __pycache__/
 *.pyc
 .claude/
 ekip_sifresi.txt
+.env
+node_modules/
+frontend/.next/
+frontend/out/

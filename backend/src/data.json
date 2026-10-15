@@ -1,0 +1,1921 @@
+{
+ "seedRules": [
+  {
+   "pattern": "ha",
+   "match_type": "kelime",
+   "category": "argo",
+   "context": "baglamsal",
+   "replacements": [
+    "",
+    "demek",
+    "değil mi",
+    "yani"
+   ],
+   "reason": "Bağlama bağlı: gülme ('Ha ha!'), hece ve cümle başı ünlem ('Ha, o mu?') işaretlenmez; cümle sonundaki kaba vurgu ('…mü ha?') işaretlenir."
+  },
+  {
+   "pattern": "be",
+   "match_type": "kelime",
+   "category": "argo",
+   "context": "baglamsal",
+   "added": "1.1",
+   "replacements": [
+    "",
+    "yani",
+    "canım"
+   ],
+   "reason": "Ekip notu: 'ya / be vb. nidalar kullanmıyoruz' — kaba sound ediyor."
+  },
+  {
+   "pattern": "he",
+   "match_type": "kelime",
+   "category": "argo",
+   "context": "baglamsal",
+   "added": "1.1",
+   "replacements": [
+    "",
+    "yani",
+    "değil mi"
+   ],
+   "reason": "Ekip notu: kaba/argo sound ediyor; 'yani' daha uygun."
+  },
+  {
+   "pattern": "kudur",
+   "match_type": "kok",
+   "category": "argo",
+   "replacements": [
+    "çok sinirlen",
+    "öfkelen",
+    "huysuzlan"
+   ],
+   "reason": "Hakaret/argo çağrışımı taşır."
+  },
+  {
+   "pattern": "kırmızı kabloyu kes",
+   "match_type": "ifade",
+   "category": "tehlikeli davranış",
+   "replacements": [
+    "kırmızı butona bas"
+   ],
+   "reason": "Kablo kesmek çocuklar için taklit edilebilir tehlikeli bir eylem."
+  },
+  {
+   "pattern": "kabloyu kes",
+   "match_type": "ifade",
+   "category": "tehlikeli davranış",
+   "replacements": [
+    "butona bas",
+    "düğmeye bas"
+   ],
+   "reason": "Elektrik kablosuyla oynamayı özendirir."
+  },
+  {
+   "pattern": "lan",
+   "match_type": "kelime",
+   "category": "argo",
+   "replacements": [
+    "",
+    "dostum"
+   ],
+   "reason": "Argo hitap."
+  },
+  {
+   "pattern": "ulan",
+   "match_type": "kelime",
+   "category": "argo",
+   "replacements": [
+    "",
+    "hey"
+   ],
+   "reason": "Argo hitap."
+  },
+  {
+   "pattern": "aptal",
+   "match_type": "kok",
+   "category": "hakaret",
+   "replacements": [
+    "şaşkın",
+    "dalgın"
+   ],
+   "reason": "Akran zorbalığını/hakareti normalleştirir."
+  },
+  {
+   "pattern": "salak",
+   "match_type": "kok",
+   "category": "hakaret",
+   "replacements": [
+    "sakar",
+    "şaşkın"
+   ],
+   "reason": "Hakaret."
+  },
+  {
+   "pattern": "gerizekalı",
+   "match_type": "kok",
+   "category": "hakaret",
+   "replacements": [
+    "şapşik",
+    "şaşkın"
+   ],
+   "reason": "Ağır hakaret."
+  },
+  {
+   "pattern": "geber",
+   "match_type": "kok",
+   "category": "şiddet",
+   "replacements": [
+    "kaybol",
+    "git buradan"
+   ],
+   "reason": "Ölüm dileği / şiddet çağrışımı."
+  },
+  {
+   "pattern": "seni öldürürüm",
+   "match_type": "ifade",
+   "category": "şiddet",
+   "replacements": [
+    "sana gününü gösteririm",
+    "seni yakalayacağım"
+   ],
+   "reason": "Tehdit / şiddet."
+  },
+  {
+   "pattern": "kahretsin",
+   "match_type": "kelime",
+   "category": "argo",
+   "replacements": [
+    "eyvah",
+    "hay aksi"
+   ],
+   "reason": "Beddua içerir."
+  },
+  {
+   "pattern": "defol",
+   "match_type": "kok",
+   "category": "kaba dil",
+   "replacements": [
+    "lütfen git",
+    "biraz yalnız kalmak istiyorum"
+   ],
+   "reason": "Kaba ve dışlayıcı ifade."
+  },
+  {
+   "pattern": "çeneni kapa",
+   "match_type": "ifade",
+   "category": "kaba dil",
+   "replacements": [
+    "biraz sessiz ol",
+    "lütfen bekle"
+   ],
+   "reason": "Kaba susturma ifadesi."
+  },
+  {
+   "pattern": "star",
+   "match_type": "kelime",
+   "category": "yabancı kelime",
+   "replacements": [
+    "yıldız",
+    "dünya yıldızı",
+    "ünlü"
+   ],
+   "reason": "Türkçesi kullanılmalı (ekip notu: 'Türkçesi kullanılmalı').",
+   "added": "1.2"
+  },
+  {
+   "pattern": "superstar",
+   "match_type": "kelime",
+   "category": "yabancı kelime",
+   "replacements": [
+    "büyük yıldız",
+    "dünya yıldızı"
+   ],
+   "reason": "Türkçesi kullanılmalı (ekip notu: 'Türkçesi kullanılmalı').",
+   "added": "1.2"
+  },
+  {
+   "pattern": "süperstar",
+   "match_type": "kelime",
+   "category": "yabancı kelime",
+   "replacements": [
+    "büyük yıldız",
+    "dünya yıldızı"
+   ],
+   "reason": "Türkçesi kullanılmalı (ekip notu: 'Türkçesi kullanılmalı').",
+   "added": "1.2"
+  },
+  {
+   "pattern": "cool",
+   "match_type": "kelime",
+   "category": "yabancı kelime",
+   "replacements": [
+    "havalı"
+   ],
+   "reason": "Türkçesi kullanılmalı (ekip notu: 'Türkçesi kullanılmalı').",
+   "added": "1.2"
+  },
+  {
+   "pattern": "okay",
+   "match_type": "kelime",
+   "category": "yabancı kelime",
+   "replacements": [
+    "tamam"
+   ],
+   "reason": "Türkçesi kullanılmalı (ekip notu: 'Türkçesi kullanılmalı').",
+   "added": "1.2"
+  },
+  {
+   "pattern": "okey",
+   "match_type": "kelime",
+   "category": "yabancı kelime",
+   "replacements": [
+    "tamam"
+   ],
+   "reason": "Türkçesi kullanılmalı (ekip notu: 'Türkçesi kullanılmalı').",
+   "added": "1.2"
+  },
+  {
+   "pattern": "wow",
+   "match_type": "kelime",
+   "category": "yabancı kelime",
+   "replacements": [
+    "vay",
+    "vay canına"
+   ],
+   "reason": "Türkçesi kullanılmalı (ekip notu: 'Türkçesi kullanılmalı').",
+   "added": "1.2"
+  },
+  {
+   "pattern": "yes",
+   "match_type": "kelime",
+   "category": "yabancı kelime",
+   "replacements": [
+    "evet",
+    "yaşasın"
+   ],
+   "reason": "Türkçesi kullanılmalı (ekip notu: 'Türkçesi kullanılmalı').",
+   "added": "1.2"
+  },
+  {
+   "pattern": "yeah",
+   "match_type": "kelime",
+   "category": "yabancı kelime",
+   "replacements": [
+    "evet"
+   ],
+   "reason": "Türkçesi kullanılmalı (ekip notu: 'Türkçesi kullanılmalı').",
+   "added": "1.2"
+  },
+  {
+   "pattern": "sorry",
+   "match_type": "kelime",
+   "category": "yabancı kelime",
+   "replacements": [
+    "pardon",
+    "özür dilerim"
+   ],
+   "reason": "Türkçesi kullanılmalı (ekip notu: 'Türkçesi kullanılmalı').",
+   "added": "1.2"
+  },
+  {
+   "pattern": "bye",
+   "match_type": "kelime",
+   "category": "yabancı kelime",
+   "replacements": [
+    "hoşça kal",
+    "görüşürüz"
+   ],
+   "reason": "Türkçesi kullanılmalı (ekip notu: 'Türkçesi kullanılmalı').",
+   "added": "1.2"
+  },
+  {
+   "pattern": "hello",
+   "match_type": "kelime",
+   "category": "yabancı kelime",
+   "replacements": [
+    "merhaba"
+   ],
+   "reason": "Türkçesi kullanılmalı (ekip notu: 'Türkçesi kullanılmalı').",
+   "added": "1.2"
+  },
+  {
+   "pattern": "thanks",
+   "match_type": "kelime",
+   "category": "yabancı kelime",
+   "replacements": [
+    "teşekkürler",
+    "sağ ol"
+   ],
+   "reason": "Türkçesi kullanılmalı (ekip notu: 'Türkçesi kullanılmalı').",
+   "added": "1.2"
+  },
+  {
+   "pattern": "thank you",
+   "match_type": "ifade",
+   "category": "yabancı kelime",
+   "replacements": [
+    "teşekkür ederim"
+   ],
+   "reason": "Türkçesi kullanılmalı (ekip notu: 'Türkçesi kullanılmalı').",
+   "added": "1.2"
+  },
+  {
+   "pattern": "please",
+   "match_type": "kelime",
+   "category": "yabancı kelime",
+   "replacements": [
+    "lütfen"
+   ],
+   "reason": "Türkçesi kullanılmalı (ekip notu: 'Türkçesi kullanılmalı').",
+   "added": "1.2"
+  },
+  {
+   "pattern": "baby",
+   "match_type": "kelime",
+   "category": "yabancı kelime",
+   "replacements": [
+    "bebeğim",
+    "tatlım"
+   ],
+   "reason": "Türkçesi kullanılmalı (ekip notu: 'Türkçesi kullanılmalı').",
+   "added": "1.2"
+  },
+  {
+   "pattern": "selfie",
+   "match_type": "kelime",
+   "category": "yabancı kelime",
+   "replacements": [
+    "özçekim",
+    "fotoğraf"
+   ],
+   "reason": "Türkçesi kullanılmalı (ekip notu: 'Türkçesi kullanılmalı').",
+   "added": "1.2"
+  },
+  {
+   "pattern": "show",
+   "match_type": "kelime",
+   "category": "yabancı kelime",
+   "replacements": [
+    "gösteri"
+   ],
+   "reason": "Türkçesi kullanılmalı (ekip notu: 'Türkçesi kullanılmalı').",
+   "added": "1.2"
+  },
+  {
+   "pattern": "party",
+   "match_type": "kelime",
+   "category": "yabancı kelime",
+   "replacements": [
+    "parti",
+    "eğlence"
+   ],
+   "reason": "Türkçesi kullanılmalı (ekip notu: 'Türkçesi kullanılmalı').",
+   "added": "1.2"
+  },
+  {
+   "pattern": "team",
+   "match_type": "kelime",
+   "category": "yabancı kelime",
+   "replacements": [
+    "takım",
+    "ekip"
+   ],
+   "reason": "Türkçesi kullanılmalı (ekip notu: 'Türkçesi kullanılmalı').",
+   "added": "1.2"
+  },
+  {
+   "pattern": "boss",
+   "match_type": "kelime",
+   "category": "yabancı kelime",
+   "replacements": [
+    "patron"
+   ],
+   "reason": "Türkçesi kullanılmalı (ekip notu: 'Türkçesi kullanılmalı').",
+   "added": "1.2"
+  },
+  {
+   "pattern": "cute",
+   "match_type": "kelime",
+   "category": "yabancı kelime",
+   "replacements": [
+    "tatlı",
+    "şirin"
+   ],
+   "reason": "Türkçesi kullanılmalı (ekip notu: 'Türkçesi kullanılmalı').",
+   "added": "1.2"
+  },
+  {
+   "pattern": "nice",
+   "match_type": "kelime",
+   "category": "yabancı kelime",
+   "replacements": [
+    "güzel",
+    "harika"
+   ],
+   "reason": "Türkçesi kullanılmalı (ekip notu: 'Türkçesi kullanılmalı').",
+   "added": "1.2"
+  },
+  {
+   "pattern": "wanted",
+   "match_type": "kelime",
+   "category": "yabancı kelime",
+   "replacements": [
+    "aranıyor"
+   ],
+   "reason": "Türkçesi kullanılmalı (ekip notu: 'Türkçesi kullanılmalı').",
+   "added": "1.2"
+  },
+  {
+   "pattern": "one",
+   "match_type": "kelime",
+   "category": "yabancı kelime",
+   "replacements": [
+    "bir"
+   ],
+   "reason": "Türkçesi kullanılmalı (ekip notu: 'Türkçesi kullanılmalı').",
+   "added": "1.2"
+  },
+  {
+   "pattern": "two",
+   "match_type": "kelime",
+   "category": "yabancı kelime",
+   "replacements": [
+    "iki"
+   ],
+   "reason": "Türkçesi kullanılmalı (ekip notu: 'Türkçesi kullanılmalı').",
+   "added": "1.2"
+  },
+  {
+   "pattern": "three",
+   "match_type": "kelime",
+   "category": "yabancı kelime",
+   "replacements": [
+    "üç"
+   ],
+   "reason": "Türkçesi kullanılmalı (ekip notu: 'Türkçesi kullanılmalı').",
+   "added": "1.2"
+  },
+  {
+   "pattern": "yey",
+   "match_type": "kelime",
+   "category": "yabancı kelime",
+   "replacements": [
+    "yaşasın"
+   ],
+   "reason": "Türkçesi kullanılmalı (ekip notu: 'Türkçesi kullanılmalı').",
+   "added": "1.2"
+  },
+  {
+   "pattern": "style",
+   "match_type": "kelime",
+   "category": "yabancı kelime",
+   "replacements": [
+    "tarz"
+   ],
+   "reason": "Türkçesi kullanılmalı (ekip notu: 'Türkçesi kullanılmalı').",
+   "added": "1.2"
+  },
+  {
+   "pattern": "fashion",
+   "match_type": "kelime",
+   "category": "yabancı kelime",
+   "replacements": [
+    "moda"
+   ],
+   "reason": "Türkçesi kullanılmalı (ekip notu: 'Türkçesi kullanılmalı').",
+   "added": "1.2"
+  },
+  {
+   "pattern": "follower",
+   "match_type": "kelime",
+   "category": "yabancı kelime",
+   "replacements": [
+    "takipçi"
+   ],
+   "reason": "Türkçesi kullanılmalı (ekip notu: 'Türkçesi kullanılmalı').",
+   "added": "1.2"
+  },
+  {
+   "pattern": "like",
+   "match_type": "kelime",
+   "category": "yabancı kelime",
+   "replacements": [
+    "beğeni"
+   ],
+   "reason": "Türkçesi kullanılmalı (ekip notu: 'Türkçesi kullanılmalı').",
+   "added": "1.2"
+  },
+  {
+   "pattern": "live",
+   "match_type": "kelime",
+   "category": "yabancı kelime",
+   "replacements": [
+    "canlı"
+   ],
+   "reason": "Türkçesi kullanılmalı (ekip notu: 'Türkçesi kullanılmalı').",
+   "added": "1.2"
+  },
+  {
+   "pattern": "bro",
+   "match_type": "kelime",
+   "category": "yabancı kelime",
+   "replacements": [
+    "kardeşim",
+    "dostum"
+   ],
+   "reason": "Türkçesi kullanılmalı (ekip notu: 'Türkçesi kullanılmalı').",
+   "added": "1.2"
+  },
+  {
+   "pattern": "dude",
+   "match_type": "kelime",
+   "category": "yabancı kelime",
+   "replacements": [
+    "dostum"
+   ],
+   "reason": "Türkçesi kullanılmalı (ekip notu: 'Türkçesi kullanılmalı').",
+   "added": "1.2"
+  },
+  {
+   "pattern": "buddy",
+   "match_type": "kelime",
+   "category": "yabancı kelime",
+   "replacements": [
+    "dostum",
+    "arkadaşım"
+   ],
+   "reason": "Türkçesi kullanılmalı (ekip notu: 'Türkçesi kullanılmalı').",
+   "added": "1.2"
+  },
+  {
+   "pattern": "oh my god",
+   "match_type": "ifade",
+   "category": "yabancı kelime",
+   "replacements": [
+    "vay canına",
+    "eyvah"
+   ],
+   "reason": "Türkçesi kullanılmalı (ekip notu: 'Türkçesi kullanılmalı').",
+   "added": "1.2"
+  },
+  {
+   "pattern": "omg",
+   "match_type": "kelime",
+   "category": "yabancı kelime",
+   "replacements": [
+    "vay canına",
+    "eyvah"
+   ],
+   "reason": "Türkçesi kullanılmalı (ekip notu: 'Türkçesi kullanılmalı').",
+   "added": "1.2"
+  },
+  {
+   "pattern": "game over",
+   "match_type": "ifade",
+   "category": "yabancı kelime",
+   "replacements": [
+    "oyun bitti"
+   ],
+   "reason": "Türkçesi kullanılmalı (ekip notu: 'Türkçesi kullanılmalı').",
+   "added": "1.2"
+  },
+  {
+   "pattern": "happy end",
+   "match_type": "ifade",
+   "category": "yabancı kelime",
+   "replacements": [
+    "mutlu son"
+   ],
+   "reason": "Türkçesi kullanılmalı (ekip notu: 'Türkçesi kullanılmalı').",
+   "added": "1.2"
+  },
+  {
+   "pattern": "welcome",
+   "match_type": "kelime",
+   "category": "yabancı kelime",
+   "replacements": [
+    "hoş geldin",
+    "hoş geldiniz"
+   ],
+   "reason": "Türkçesi kullanılmalı (ekip notu: 'Türkçesi kullanılmalı').",
+   "added": "1.2"
+  },
+  {
+   "pattern": "good job",
+   "match_type": "ifade",
+   "category": "yabancı kelime",
+   "replacements": [
+    "aferin",
+    "harika iş"
+   ],
+   "reason": "Türkçesi kullanılmalı (ekip notu: 'Türkçesi kullanılmalı').",
+   "added": "1.2"
+  },
+  {
+   "pattern": "congratulations",
+   "match_type": "kelime",
+   "category": "yabancı kelime",
+   "replacements": [
+    "tebrikler"
+   ],
+   "reason": "Türkçesi kullanılmalı (ekip notu: 'Türkçesi kullanılmalı').",
+   "added": "1.2"
+  },
+  {
+   "pattern": "hashtag",
+   "match_type": "kelime",
+   "category": "yabancı kelime",
+   "replacements": [
+    "etiket"
+   ],
+   "reason": "Türkçesi kullanılmalı (ekip notu: 'Türkçesi kullanılmalı').",
+   "added": "1.2"
+  },
+  {
+   "pattern": "trend",
+   "match_type": "kelime",
+   "category": "yabancı kelime",
+   "replacements": [
+    "akım",
+    "moda"
+   ],
+   "reason": "Türkçesi kullanılmalı (ekip notu: 'Türkçesi kullanılmalı').",
+   "added": "1.2"
+  },
+  {
+   "pattern": "challenge",
+   "match_type": "kelime",
+   "category": "yabancı kelime",
+   "replacements": [
+    "meydan okuma",
+    "yarışma"
+   ],
+   "reason": "Türkçesi kullanılmalı (ekip notu: 'Türkçesi kullanılmalı').",
+   "added": "1.2"
+  },
+  {
+   "pattern": "influencer",
+   "match_type": "kelime",
+   "category": "yabancı kelime",
+   "replacements": [
+    "fenomen"
+   ],
+   "reason": "Türkçesi kullanılmalı (ekip notu: 'Türkçesi kullanılmalı').",
+   "added": "1.2"
+  },
+  {
+   "pattern": "vlog",
+   "match_type": "kelime",
+   "category": "yabancı kelime",
+   "replacements": [
+    "video günlüğü"
+   ],
+   "reason": "Türkçesi kullanılmalı (ekip notu: 'Türkçesi kullanılmalı').",
+   "added": "1.2"
+  },
+  {
+   "pattern": "event",
+   "match_type": "kelime",
+   "category": "yabancı kelime",
+   "replacements": [
+    "etkinlik"
+   ],
+   "reason": "Türkçesi kullanılmalı (ekip notu: 'Türkçesi kullanılmalı').",
+   "added": "1.2"
+  },
+  {
+   "pattern": "mood",
+   "match_type": "kelime",
+   "category": "yabancı kelime",
+   "replacements": [
+    "ruh hali",
+    "keyif"
+   ],
+   "reason": "Türkçesi kullanılmalı (ekip notu: 'Türkçesi kullanılmalı').",
+   "added": "1.2"
+  },
+  {
+   "pattern": "best friend",
+   "match_type": "ifade",
+   "category": "yabancı kelime",
+   "replacements": [
+    "en iyi arkadaş"
+   ],
+   "reason": "Türkçesi kullanılmalı (ekip notu: 'Türkçesi kullanılmalı').",
+   "added": "1.2"
+  },
+  {
+   "pattern": "lol",
+   "match_type": "kelime",
+   "category": "yabancı kelime",
+   "replacements": [
+    ""
+   ],
+   "reason": "Türkçesi kullanılmalı (ekip notu: 'Türkçesi kullanılmalı').",
+   "added": "1.2"
+  },
+  {
+   "pattern": "tekrar yeniden",
+   "match_type": "ifade",
+   "category": "fazlalık / gereksiz uzatma",
+   "replacements": [
+    "yeniden",
+    "tekrar"
+   ],
+   "reason": "Aynı anlamdaki iki kelime yan yana.",
+   "added": "1.2"
+  },
+  {
+   "pattern": "yeniden tekrar",
+   "match_type": "ifade",
+   "category": "fazlalık / gereksiz uzatma",
+   "replacements": [
+    "tekrar",
+    "yeniden"
+   ],
+   "reason": "Aynı anlamdaki iki kelime yan yana.",
+   "added": "1.2"
+  },
+  {
+   "pattern": "geri iade",
+   "match_type": "kok",
+   "category": "fazlalık / gereksiz uzatma",
+   "replacements": [
+    "iade"
+   ],
+   "reason": "'İade' zaten geri vermek demek.",
+   "added": "1.2"
+  },
+  {
+   "pattern": "birlikte beraber",
+   "match_type": "ifade",
+   "category": "fazlalık / gereksiz uzatma",
+   "replacements": [
+    "birlikte"
+   ],
+   "reason": "Aynı anlamdaki iki kelime yan yana.",
+   "added": "1.2"
+  },
+  {
+   "pattern": "beraber birlikte",
+   "match_type": "ifade",
+   "category": "fazlalık / gereksiz uzatma",
+   "replacements": [
+    "birlikte"
+   ],
+   "reason": "Aynı anlamdaki iki kelime yan yana.",
+   "added": "1.2"
+  },
+  {
+   "pattern": "en son sonunda",
+   "match_type": "ifade",
+   "category": "fazlalık / gereksiz uzatma",
+   "replacements": [
+    "sonunda"
+   ],
+   "reason": "Gereksiz uzatma.",
+   "added": "1.2"
+  },
+  {
+   "pattern": "hala daha",
+   "match_type": "ifade",
+   "category": "fazlalık / gereksiz uzatma",
+   "replacements": [
+    "hâlâ"
+   ],
+   "reason": "Gereksiz uzatma.",
+   "added": "1.2"
+  },
+  {
+   "pattern": "hâlâ daha",
+   "match_type": "ifade",
+   "category": "fazlalık / gereksiz uzatma",
+   "replacements": [
+    "hâlâ"
+   ],
+   "reason": "Gereksiz uzatma.",
+   "added": "1.2"
+  },
+  {
+   "pattern": "ileriye doğru ilerle",
+   "match_type": "kok",
+   "category": "fazlalık / gereksiz uzatma",
+   "replacements": [
+    "ilerle"
+   ],
+   "reason": "Gereksiz uzatma.",
+   "added": "1.2"
+  },
+  {
+   "pattern": "geriye doğru gerile",
+   "match_type": "kok",
+   "category": "fazlalık / gereksiz uzatma",
+   "replacements": [
+    "gerile"
+   ],
+   "reason": "Gereksiz uzatma.",
+   "added": "1.2"
+  },
+  {
+   "pattern": "yukarıya doğru yüksel",
+   "match_type": "kok",
+   "category": "fazlalık / gereksiz uzatma",
+   "replacements": [
+    "yüksel"
+   ],
+   "reason": "Gereksiz uzatma.",
+   "added": "1.2"
+  },
+  {
+   "pattern": "sonradan pişman",
+   "match_type": "kok",
+   "category": "fazlalık / gereksiz uzatma",
+   "replacements": [
+    "pişman"
+   ],
+   "reason": "Pişmanlık zaten sonradan olur.",
+   "added": "1.2"
+  },
+  {
+   "pattern": "yalı daire",
+   "match_type": "kok",
+   "category": "fazlalık / gereksiz uzatma",
+   "replacements": [
+    "yalı"
+   ],
+   "reason": "Yalı zaten bir konut; 'yalı dairesi' gereksiz uzatma.",
+   "added": "1.2"
+  },
+  {
+   "pattern": "küçük minik",
+   "match_type": "ifade",
+   "category": "fazlalık / gereksiz uzatma",
+   "replacements": [
+    "minik"
+   ],
+   "reason": "Aynı anlamdaki iki kelime yan yana.",
+   "added": "1.2"
+  },
+  {
+   "pattern": "kocaman büyük",
+   "match_type": "ifade",
+   "category": "fazlalık / gereksiz uzatma",
+   "replacements": [
+    "kocaman"
+   ],
+   "reason": "Aynı anlamdaki iki kelime yan yana.",
+   "added": "1.2"
+  },
+  {
+   "pattern": "büyük kocaman",
+   "match_type": "ifade",
+   "category": "fazlalık / gereksiz uzatma",
+   "replacements": [
+    "kocaman"
+   ],
+   "reason": "Aynı anlamdaki iki kelime yan yana.",
+   "added": "1.2"
+  },
+  {
+   "pattern": "şimdi şu an",
+   "match_type": "ifade",
+   "category": "fazlalık / gereksiz uzatma",
+   "replacements": [
+    "şu an"
+   ],
+   "reason": "Aynı anlamdaki iki kelime yan yana.",
+   "added": "1.2"
+  },
+  {
+   "pattern": "şu an şimdi",
+   "match_type": "ifade",
+   "category": "fazlalık / gereksiz uzatma",
+   "replacements": [
+    "şimdi"
+   ],
+   "reason": "Aynı anlamdaki iki kelime yan yana.",
+   "added": "1.2"
+  },
+  {
+   "pattern": "önce ilk olarak",
+   "match_type": "ifade",
+   "category": "fazlalık / gereksiz uzatma",
+   "replacements": [
+    "ilk olarak"
+   ],
+   "reason": "Gereksiz uzatma.",
+   "added": "1.2"
+  },
+  {
+   "pattern": "karşılıklı olarak birbirine",
+   "match_type": "ifade",
+   "category": "fazlalık / gereksiz uzatma",
+   "replacements": [
+    "birbirine"
+   ],
+   "reason": "Gereksiz uzatma.",
+   "added": "1.2"
+  },
+  {
+   "pattern": "kulağ[ıi]n[ıi]n dibinde",
+   "match_type": "desen",
+   "category": "kötü örnek davranış",
+   "replacements": [
+    "biraz uzağında",
+    "yanında"
+   ],
+   "reason": "Birinin kulağının dibinde ses/müzik aleti çalmak taklit edilebilir; işitmeye zarar verebilir.",
+   "added": "1.2"
+  },
+  {
+   "pattern": "kulağına (?:dayar|dayayarak|dayayıp|yaklaştırır|yaklaştırarak)",
+   "match_type": "desen",
+   "category": "kötü örnek davranış",
+   "replacements": [
+    "havaya doğru tutar"
+   ],
+   "reason": "Müzik aletini/ses kaynağını birinin kulağına dayamak taklit edilebilir olumsuz örnek.",
+   "added": "1.2"
+  },
+  {
+   "pattern": "ağzına (?:döker|döküverir|boşaltır|tıkar|tıkıştırır|sokar|zorla)",
+   "match_type": "desen",
+   "category": "kötü örnek davranış",
+   "replacements": [
+    "eline verir",
+    "ona uzatır"
+   ],
+   "reason": "Zorla içirme/yedirme ya da bilerek üstüne dökme izlenimi veriyor.",
+   "added": "1.2"
+  },
+  {
+   "pattern": "(?:kafasını|başını|yüzünü) (?:[\\w’'çğıöşü]+ ){0,4}(?:daldırır|daldırıp|sokar|sokup|batırır|batırıp)",
+   "match_type": "desen",
+   "category": "kötü örnek davranış",
+   "replacements": [],
+   "reason": "Birinin kafasını zorla bir şeye daldırmak kötü örnek; serinletmek için güvenli bir yol seçin.",
+   "added": "1.2"
+  },
+  {
+   "pattern": "(?:kafasına|başına|yüzüne|üstüne) (?:[\\w’'çğıöşü]+ ){0,3}(?:döker|boşaltır|fırlatır|geçirir)",
+   "match_type": "desen",
+   "category": "kötü örnek davranış",
+   "replacements": [],
+   "reason": "Birinin üstüne/kafasına bilerek bir şey dökmek ya da atmak olumsuz örnek.",
+   "added": "1.2"
+  },
+  {
+   "pattern": "zorla (?:içirir|yedirir|içiriyor|yediriyor|içirmeye|yedirmeye)",
+   "match_type": "desen",
+   "category": "kötü örnek davranış",
+   "replacements": [],
+   "reason": "Zorla yedirme/içirme olumsuz örnek.",
+   "added": "1.2"
+  },
+  {
+   "pattern": "(?:tokat atar|tokatlar|çelme takar|saçını çeker|saçlarını çeker|yumruk atar|tekme atar|iterek düşürür|itip düşürür|kafasına vurur|kafasına bir tane)",
+   "match_type": "desen",
+   "category": "şiddet",
+   "replacements": [],
+   "reason": "Fiziksel şiddet içeren davranış; çocuklar taklit edebilir.",
+   "added": "1.2"
+  },
+  {
+   "pattern": "(?:prize|elektrik kablosuna|kabloya) (?:dokunur|sokar|çatal|parmağını)",
+   "match_type": "desen",
+   "category": "çocuk güvenliği",
+   "replacements": [],
+   "reason": "Elektrikle oynamak taklit edilebilir, hayati tehlike.",
+   "added": "1.2"
+  },
+  {
+   "pattern": "(?:çakmak|kibrit) (?:çakar|yakar)",
+   "match_type": "desen",
+   "category": "çocuk güvenliği",
+   "replacements": [],
+   "reason": "Ateşle oynamayı özendirebilir.",
+   "added": "1.2"
+  },
+  {
+   "pattern": "(?:pencereden|balkondan|çatıdan|camdan) (?:atlar|sarkar|aşağı atlar)",
+   "match_type": "desen",
+   "category": "çocuk güvenliği",
+   "replacements": [],
+   "reason": "Yüksekten atlamak/sarkmak taklit edilebilir tehlikeli davranış.",
+   "added": "1.2"
+  },
+  {
+   "pattern": "(?:(?:selam|naber|hey|sağ ?ol|eyvallah)[,\\s]+kral|kralım)(?![\\wçğıöşü])",
+   "match_type": "desen",
+   "category": "argo / kaba dil",
+   "replacements": [
+    "dostum",
+    "şampiyon"
+   ],
+   "reason": "Ekip notu: argoya kaçan hitap şekli.",
+   "added": "1.2"
+  },
+  {
+   "pattern": "efsane(?:\\s*!|\\s+(?:bir|oldu|olacak|olmuş|ötesi)(?![\\wçğıöşü]))",
+   "match_type": "desen",
+   "category": "argo / kaba dil",
+   "replacements": [
+    "efsanevi",
+    "harika"
+   ],
+   "reason": "Ekip notu: 'efsanevi' daha uygun.",
+   "added": "1.2"
+  },
+  {
+   "pattern": "gaza gel",
+   "match_type": "kok",
+   "category": "argo / kaba dil",
+   "replacements": [
+    "iyice havaya gir",
+    "heyecanlan",
+    "coş"
+   ],
+   "reason": "Argo deyim.",
+   "added": "1.2"
+  },
+  {
+   "pattern": "gaza getir",
+   "match_type": "kok",
+   "category": "argo / kaba dil",
+   "replacements": [
+    "heyecanlandır",
+    "coştur"
+   ],
+   "reason": "Argo deyim.",
+   "added": "1.2"
+  },
+  {
+   "pattern": "kafayı ye",
+   "match_type": "kok",
+   "category": "argo / kaba dil",
+   "replacements": [
+    "çılgına dön",
+    "aklını kaçır"
+   ],
+   "reason": "Ekip notu: 'çılgına dönsün' daha uygun.",
+   "added": "1.2"
+  },
+  {
+   "pattern": "kafayı sıyır",
+   "match_type": "kok",
+   "category": "argo / kaba dil",
+   "replacements": [
+    "çılgına dön"
+   ],
+   "reason": "Argo deyim.",
+   "added": "1.2"
+  },
+  {
+   "pattern": "kanka",
+   "match_type": "kok",
+   "category": "argo / kaba dil",
+   "replacements": [
+    "dostum",
+    "arkadaşım"
+   ],
+   "reason": "Argo hitap.",
+   "added": "1.2"
+  },
+  {
+   "pattern": "moruk",
+   "match_type": "kok",
+   "category": "argo / kaba dil",
+   "replacements": [
+    "dostum"
+   ],
+   "reason": "Argo hitap.",
+   "added": "1.2"
+  },
+  {
+   "pattern": "panpa",
+   "match_type": "kok",
+   "category": "argo / kaba dil",
+   "replacements": [
+    "dostum"
+   ],
+   "reason": "Argo hitap.",
+   "added": "1.2"
+  },
+  {
+   "pattern": "aynen",
+   "match_type": "kelime",
+   "category": "argo / kaba dil",
+   "replacements": [
+    "kesinlikle",
+    "evet"
+   ],
+   "reason": "Sokak ağzı onay.",
+   "added": "1.2"
+  },
+  {
+   "pattern": "oha",
+   "match_type": "kelime",
+   "category": "argo / kaba dil",
+   "replacements": [
+    "vay",
+    "inanılmaz"
+   ],
+   "reason": "Kaba ünlem.",
+   "added": "1.2"
+  },
+  {
+   "pattern": "çüş",
+   "match_type": "kelime",
+   "category": "argo / kaba dil",
+   "replacements": [
+    "vay",
+    "dur bakalım"
+   ],
+   "reason": "Kaba ünlem.",
+   "added": "1.2"
+  },
+  {
+   "pattern": "yemezler",
+   "match_type": "kelime",
+   "category": "argo / kaba dil",
+   "replacements": [
+    "inanmam",
+    "olmaz öyle şey"
+   ],
+   "reason": "Argo.",
+   "added": "1.2"
+  },
+  {
+   "pattern": "kapak olsun",
+   "match_type": "ifade",
+   "category": "argo / kaba dil",
+   "replacements": [
+    "al sana",
+    "işte böyle"
+   ],
+   "reason": "Argo.",
+   "added": "1.2"
+  },
+  {
+   "pattern": "tırs",
+   "match_type": "kok",
+   "category": "argo / kaba dil",
+   "replacements": [
+    "kork"
+   ],
+   "reason": "Argo ('tırsmak').",
+   "added": "1.2"
+  },
+  {
+   "pattern": "zıbar",
+   "match_type": "kok",
+   "category": "argo / kaba dil",
+   "replacements": [
+    "uyu",
+    "uzan"
+   ],
+   "reason": "Kaba ('zıbarmak').",
+   "added": "1.2"
+  },
+  {
+   "pattern": "tıkın",
+   "match_type": "kok",
+   "category": "argo / kaba dil",
+   "replacements": [
+    "ye",
+    "atıştır"
+   ],
+   "reason": "Kaba ('tıkınmak').",
+   "added": "1.2"
+  },
+  {
+   "pattern": "fırça ye",
+   "match_type": "kok",
+   "category": "argo / kaba dil",
+   "replacements": [
+    "azar işit"
+   ],
+   "reason": "Argo deyim.",
+   "added": "1.2"
+  },
+  {
+   "pattern": "atar yap",
+   "match_type": "kok",
+   "category": "argo / kaba dil",
+   "replacements": [
+    "sinirlen",
+    "kızgınlık göster"
+   ],
+   "reason": "Argo deyim.",
+   "added": "1.2"
+  },
+  {
+   "pattern": "kafa ütüle",
+   "match_type": "kok",
+   "category": "argo / kaba dil",
+   "replacements": [
+    "başını ağrıt"
+   ],
+   "reason": "Argo deyim.",
+   "added": "1.2"
+  },
+  {
+   "pattern": "ağzını topla",
+   "match_type": "ifade",
+   "category": "argo / kaba dil",
+   "replacements": [
+    "sözlerine dikkat et"
+   ],
+   "reason": "Kaba ve sert söylem.",
+   "added": "1.2"
+  },
+  {
+   "pattern": "sus be",
+   "match_type": "ifade",
+   "category": "argo / kaba dil",
+   "replacements": [
+    "biraz sessiz ol"
+   ],
+   "reason": "Kaba susturma.",
+   "added": "1.2"
+  },
+  {
+   "pattern": "kuş beyinli",
+   "match_type": "ifade",
+   "category": "hakaret / alay",
+   "replacements": [
+    "dalgın",
+    "şaşkın"
+   ],
+   "reason": "Ekip notu: hakaret ediyor, olumsuz örnek.",
+   "added": "1.2"
+  },
+  {
+   "pattern": "dangalak",
+   "match_type": "kok",
+   "category": "hakaret / alay",
+   "replacements": [
+    "şaşkın"
+   ],
+   "reason": "Hakaret.",
+   "added": "1.2"
+  },
+  {
+   "pattern": "enayi",
+   "match_type": "kok",
+   "category": "hakaret / alay",
+   "replacements": [
+    "saf",
+    "şaşkın"
+   ],
+   "reason": "Hakaret.",
+   "added": "1.2"
+  },
+  {
+   "pattern": "pataklar",
+   "match_type": "kok",
+   "category": "şiddet",
+   "replacements": [
+    "yakalar",
+    "durdurur"
+   ],
+   "reason": "Şiddet ('pataklamak').",
+   "added": "1.2"
+  },
+  {
+   "pattern": "dayak",
+   "match_type": "kok",
+   "category": "şiddet",
+   "replacements": [
+    "ceza",
+    "azar"
+   ],
+   "reason": "Şiddet çağrışımı.",
+   "added": "1.2"
+  },
+  {
+   "pattern": "geberti",
+   "match_type": "kok",
+   "category": "şiddet",
+   "replacements": [
+    "yakala"
+   ],
+   "reason": "Ölüm/şiddet çağrışımı.",
+   "added": "1.2"
+  },
+  {
+   "pattern": "bela",
+   "match_type": "kok",
+   "category": "argo / kaba dil",
+   "replacements": [
+    "dert",
+    "sorun"
+   ],
+   "reason": "Ekip notu: yasaklı kelime; yerine 'derde' denilebilir.",
+   "added": "1.2"
+  },
+  {
+   "pattern": "herkez",
+   "match_type": "kok",
+   "category": "dil bilgisi / yazım",
+   "replacements": [
+    "herkes"
+   ],
+   "reason": "Doğru yazımı: 'herkes'.",
+   "added": "1.2"
+  },
+  {
+   "pattern": "yalnış",
+   "match_type": "kok",
+   "category": "dil bilgisi / yazım",
+   "replacements": [
+    "yanlış"
+   ],
+   "reason": "Doğru yazımı: 'yanlış'.",
+   "added": "1.2"
+  },
+  {
+   "pattern": "yanlız",
+   "match_type": "kok",
+   "category": "dil bilgisi / yazım",
+   "replacements": [
+    "yalnız"
+   ],
+   "reason": "Doğru yazımı: 'yalnız'.",
+   "added": "1.2"
+  },
+  {
+   "pattern": "yanlızca",
+   "match_type": "kok",
+   "category": "dil bilgisi / yazım",
+   "replacements": [
+    "yalnızca"
+   ],
+   "reason": "Doğru yazımı: 'yalnızca'.",
+   "added": "1.2"
+  },
+  {
+   "pattern": "birşey",
+   "match_type": "kok",
+   "category": "dil bilgisi / yazım",
+   "replacements": [
+    "bir şey"
+   ],
+   "reason": "Doğru yazımı: 'bir şey'.",
+   "added": "1.2"
+  },
+  {
+   "pattern": "herşey",
+   "match_type": "kok",
+   "category": "dil bilgisi / yazım",
+   "replacements": [
+    "her şey"
+   ],
+   "reason": "Doğru yazımı: 'her şey'.",
+   "added": "1.2"
+  },
+  {
+   "pattern": "hiçbirşey",
+   "match_type": "kok",
+   "category": "dil bilgisi / yazım",
+   "replacements": [
+    "hiçbir şey"
+   ],
+   "reason": "Doğru yazımı: 'hiçbir şey'.",
+   "added": "1.2"
+  },
+  {
+   "pattern": "hiç bir",
+   "match_type": "kelime",
+   "category": "dil bilgisi / yazım",
+   "replacements": [
+    "hiçbir"
+   ],
+   "reason": "Doğru yazımı: 'hiçbir'.",
+   "added": "1.2"
+  },
+  {
+   "pattern": "her hangi",
+   "match_type": "kelime",
+   "category": "dil bilgisi / yazım",
+   "replacements": [
+    "herhangi"
+   ],
+   "reason": "Doğru yazımı: 'herhangi'.",
+   "added": "1.2"
+  },
+  {
+   "pattern": "şuan",
+   "match_type": "kok",
+   "category": "dil bilgisi / yazım",
+   "replacements": [
+    "şu an"
+   ],
+   "reason": "Doğru yazımı: 'şu an'.",
+   "added": "1.2"
+  },
+  {
+   "pattern": "malesef",
+   "match_type": "kok",
+   "category": "dil bilgisi / yazım",
+   "replacements": [
+    "maalesef"
+   ],
+   "reason": "Doğru yazımı: 'maalesef'.",
+   "added": "1.2"
+  },
+  {
+   "pattern": "orjinal",
+   "match_type": "kok",
+   "category": "dil bilgisi / yazım",
+   "replacements": [
+    "orijinal"
+   ],
+   "reason": "Doğru yazımı: 'orijinal'.",
+   "added": "1.2"
+  },
+  {
+   "pattern": "yada",
+   "match_type": "kelime",
+   "category": "dil bilgisi / yazım",
+   "replacements": [
+    "ya da"
+   ],
+   "reason": "Doğru yazımı: 'ya da'.",
+   "added": "1.2"
+  },
+  {
+   "pattern": "pekçok",
+   "match_type": "kok",
+   "category": "dil bilgisi / yazım",
+   "replacements": [
+    "pek çok"
+   ],
+   "reason": "Doğru yazımı: 'pek çok'.",
+   "added": "1.2"
+  },
+  {
+   "pattern": "birkez",
+   "match_type": "kok",
+   "category": "dil bilgisi / yazım",
+   "replacements": [
+    "bir kez"
+   ],
+   "reason": "Doğru yazımı: 'bir kez'.",
+   "added": "1.2"
+  },
+  {
+   "pattern": "hergün",
+   "match_type": "kok",
+   "category": "dil bilgisi / yazım",
+   "replacements": [
+    "her gün"
+   ],
+   "reason": "Doğru yazımı: 'her gün'.",
+   "added": "1.2"
+  },
+  {
+   "pattern": "birsürü",
+   "match_type": "kok",
+   "category": "dil bilgisi / yazım",
+   "replacements": [
+    "bir sürü"
+   ],
+   "reason": "Doğru yazımı: 'bir sürü'.",
+   "added": "1.2"
+  },
+  {
+   "pattern": "tabiki",
+   "match_type": "kok",
+   "category": "dil bilgisi / yazım",
+   "replacements": [
+    "tabii ki"
+   ],
+   "reason": "Doğru yazımı: 'tabii ki'.",
+   "added": "1.2"
+  },
+  {
+   "pattern": "tabi ki",
+   "match_type": "kelime",
+   "category": "dil bilgisi / yazım",
+   "replacements": [
+    "tabii ki"
+   ],
+   "reason": "Doğru yazımı: 'tabii ki'.",
+   "added": "1.2"
+  },
+  {
+   "pattern": "tamamiyle",
+   "match_type": "kok",
+   "category": "dil bilgisi / yazım",
+   "replacements": [
+    "tamamıyla"
+   ],
+   "reason": "Doğru yazımı: 'tamamıyla'.",
+   "added": "1.2"
+  },
+  {
+   "pattern": "deyil",
+   "match_type": "kok",
+   "category": "dil bilgisi / yazım",
+   "replacements": [
+    "değil"
+   ],
+   "reason": "Doğru yazımı: 'değil'.",
+   "added": "1.2"
+  },
+  {
+   "pattern": "laboratuar",
+   "match_type": "kok",
+   "category": "dil bilgisi / yazım",
+   "replacements": [
+    "laboratuvar"
+   ],
+   "reason": "Doğru yazımı: 'laboratuvar'.",
+   "added": "1.2"
+  },
+  {
+   "pattern": "süpriz",
+   "match_type": "kok",
+   "category": "dil bilgisi / yazım",
+   "replacements": [
+    "sürpriz"
+   ],
+   "reason": "Doğru yazımı: 'sürpriz'.",
+   "added": "1.2"
+  },
+  {
+   "pattern": "sürpiz",
+   "match_type": "kok",
+   "category": "dil bilgisi / yazım",
+   "replacements": [
+    "sürpriz"
+   ],
+   "reason": "Doğru yazımı: 'sürpriz'.",
+   "added": "1.2"
+  },
+  {
+   "pattern": "traş",
+   "match_type": "kok",
+   "category": "dil bilgisi / yazım",
+   "replacements": [
+    "tıraş"
+   ],
+   "reason": "Doğru yazımı: 'tıraş'.",
+   "added": "1.2"
+  },
+  {
+   "pattern": "egzos",
+   "match_type": "kok",
+   "category": "dil bilgisi / yazım",
+   "replacements": [
+    "egzoz"
+   ],
+   "reason": "Doğru yazımı: 'egzoz'.",
+   "added": "1.2"
+  },
+  {
+   "pattern": "mütevazi",
+   "match_type": "kok",
+   "category": "dil bilgisi / yazım",
+   "replacements": [
+    "mütevazı"
+   ],
+   "reason": "Doğru yazımı: 'mütevazı'.",
+   "added": "1.2"
+  },
+  {
+   "pattern": "kordinat",
+   "match_type": "kok",
+   "category": "dil bilgisi / yazım",
+   "replacements": [
+    "koordinat"
+   ],
+   "reason": "Doğru yazımı: 'koordinat'.",
+   "added": "1.2"
+  },
+  {
+   "pattern": "şarz",
+   "match_type": "kok",
+   "category": "dil bilgisi / yazım",
+   "replacements": [
+    "şarj"
+   ],
+   "reason": "Doğru yazımı: 'şarj'.",
+   "added": "1.2"
+  },
+  {
+   "pattern": "entellektüel",
+   "match_type": "kok",
+   "category": "dil bilgisi / yazım",
+   "replacements": [
+    "entelektüel"
+   ],
+   "reason": "Doğru yazımı: 'entelektüel'.",
+   "added": "1.2"
+  },
+  {
+   "pattern": "eşortman",
+   "match_type": "kok",
+   "category": "dil bilgisi / yazım",
+   "replacements": [
+    "eşofman"
+   ],
+   "reason": "Doğru yazımı: 'eşofman'.",
+   "added": "1.2"
+  },
+  {
+   "pattern": "şöyleki",
+   "match_type": "kok",
+   "category": "dil bilgisi / yazım",
+   "replacements": [
+    "şöyle ki"
+   ],
+   "reason": "Doğru yazımı: 'şöyle ki'.",
+   "added": "1.2"
+  },
+  {
+   "pattern": "oysaki",
+   "match_type": "kok",
+   "category": "dil bilgisi / yazım",
+   "replacements": [
+    "oysa ki"
+   ],
+   "reason": "Doğru yazımı: 'oysa ki'.",
+   "added": "1.2"
+  },
+  {
+   "pattern": "yinede",
+   "match_type": "kok",
+   "category": "dil bilgisi / yazım",
+   "replacements": [
+    "yine de"
+   ],
+   "reason": "Doğru yazımı: 'yine de'.",
+   "added": "1.2"
+  },
+  {
+   "pattern": "herkeze",
+   "match_type": "kok",
+   "category": "dil bilgisi / yazım",
+   "replacements": [
+    "herkese"
+   ],
+   "reason": "Doğru yazımı: 'herkese'.",
+   "added": "1.2"
+  },
+  {
+   "pattern": "yanlızlık",
+   "match_type": "kok",
+   "category": "dil bilgisi / yazım",
+   "replacements": [
+    "yalnızlık"
+   ],
+   "reason": "Doğru yazımı: 'yalnızlık'.",
+   "added": "1.2"
+  },
+  {
+   "pattern": "kılavus",
+   "match_type": "kok",
+   "category": "dil bilgisi / yazım",
+   "replacements": [
+    "kılavuz"
+   ],
+   "reason": "Doğru yazımı: 'kılavuz'.",
+   "added": "1.2"
+  },
+  {
+   "pattern": "ihtyiaç",
+   "match_type": "kok",
+   "category": "dil bilgisi / yazım",
+   "replacements": [
+    "ihtiyaç"
+   ],
+   "reason": "Doğru yazımı: 'ihtiyaç'.",
+   "added": "1.2"
+  },
+  {
+   "pattern": "doktur",
+   "match_type": "kok",
+   "category": "dil bilgisi / yazım",
+   "replacements": [
+    "doktor"
+   ],
+   "reason": "Doğru yazımı: 'doktor'.",
+   "added": "1.2"
+  },
+  {
+   "pattern": "pantalon",
+   "match_type": "kok",
+   "category": "dil bilgisi / yazım",
+   "replacements": [
+    "pantolon"
+   ],
+   "reason": "Doğru yazımı: 'pantolon'.",
+   "added": "1.2"
+  },
+  {
+   "pattern": "makina",
+   "match_type": "kok",
+   "category": "dil bilgisi / yazım",
+   "replacements": [
+    "makine"
+   ],
+   "reason": "Doğru yazımı: 'makine'.",
+   "added": "1.2"
+  },
+  {
+   "pattern": "antreman",
+   "match_type": "kok",
+   "category": "dil bilgisi / yazım",
+   "replacements": [
+    "antrenman"
+   ],
+   "reason": "Doğru yazımı: 'antrenman'.",
+   "added": "1.2"
+  },
+  {
+   "pattern": "kirbaç",
+   "match_type": "kok",
+   "category": "dil bilgisi / yazım",
+   "replacements": [
+    "kırbaç"
+   ],
+   "reason": "Doğru yazımı: 'kırbaç'.",
+   "added": "1.2"
+  },
+  {
+   "pattern": "yiyecekmisin",
+   "match_type": "kok",
+   "category": "dil bilgisi / yazım",
+   "replacements": [
+    "yiyecek misin"
+   ],
+   "reason": "Doğru yazımı: 'yiyecek misin'.",
+   "added": "1.2"
+  },
+  {
+   "pattern": "istermisin",
+   "match_type": "kok",
+   "category": "dil bilgisi / yazım",
+   "replacements": [
+    "ister misin"
+   ],
+   "reason": "Doğru yazımı: 'ister misin'.",
+   "added": "1.2"
+  },
+  {
+   "pattern": "gelirmisin",
+   "match_type": "kok",
+   "category": "dil bilgisi / yazım",
+   "replacements": [
+    "gelir misin"
+   ],
+   "reason": "Doğru yazımı: 'gelir misin'.",
+   "added": "1.2"
+  },
+  {
+   "pattern": "varmı",
+   "match_type": "kelime",
+   "category": "dil bilgisi / yazım",
+   "replacements": [
+    "var mı"
+   ],
+   "reason": "Doğru yazımı: 'var mı'.",
+   "added": "1.2"
+  },
+  {
+   "pattern": "yokmu",
+   "match_type": "kelime",
+   "category": "dil bilgisi / yazım",
+   "replacements": [
+    "yok mu"
+   ],
+   "reason": "Doğru yazımı: 'yok mu'.",
+   "added": "1.2"
+  },
+  {
+   "pattern": "değilmi",
+   "match_type": "kelime",
+   "category": "dil bilgisi / yazım",
+   "replacements": [
+    "değil mi"
+   ],
+   "reason": "Doğru yazımı: 'değil mi'.",
+   "added": "1.2"
+  },
+  {
+   "pattern": "öylemi",
+   "match_type": "kelime",
+   "category": "dil bilgisi / yazım",
+   "replacements": [
+    "öyle mi"
+   ],
+   "reason": "Doğru yazımı: 'öyle mi'.",
+   "added": "1.2"
+  }
+ ],
+ "systemPrompt": "Sen çocuklara yönelik animasyon dizileri için çalışan deneyimli bir senaryo editörüsün.\nYapımcı/kanal ekibinin senaryolara düştüğü notların aynısını, aynı bakış açısıyla önceden yakalamak\nistiyoruz. Görevin, sana verilen senaryoda ekibin işaretleyeceği yerleri bulmak ve sahnenin anlamını,\nkarakterin sesini ve hikâyenin akışını bozmadan düzeltme önermek.\n\nNeleri işaretlemelisin:\n- Çocuk güvenliği: çocukların taklit edebileceği tehlikeli eylemler (kablo kesmek, prize dokunmak,\n  kulağın dibinde yüksek ses, ağzı doluyken uyumak, kapalı kutuda nefessiz kalmak...). Güvenli\n  bir eylemle değiştir (ör. \"kırmızı kabloyu kes\" -> \"kırmızı butona bas\").\n- Kötü örnek davranış: çocukların taklit edebileceği her türlü olumsuz davranış. Örnekler:\n  \"mini bir trompeti Keday'ın kulağının dibinde çalmaya başlar\" (kulağın dibinde müzik aleti çalmak),\n  \"Kahveyi Keday'ın ağzına döker\" (zorla içirme ya da üstüne bilerek dökme izlenimi),\n  \"Keday'ın kafasını buz dolu kaseye daldırıp çıkarır\" (birinin kafasını zorla bir şeye daldırmak),\n  kandırmak, eşyaları fırlatmak, saygısızlık, kural çiğnemeyi özendirmek. Davranışı, sahnenin\n  amacını koruyan güvenli bir davranışla değiştir.\n- Şiddet / sert söylem, tehdit; hakaret ve alay (ör. \"kuş beyinli\", burunla dalga geçmek).\n- Argo / kaba dil ve yasaklı kelimeler; argo deyimleri de yakala (\"gaza gelip\" -> \"iyice havaya girip\",\n  \"kafayı yemek\" -> \"çılgına dönmek\", \"kral\" hitabı, \"kanka\", \"efsane!\"). Ekip \"ya / be / he\" gibi nidaları ve cümle sonundaki\n  vurgulu \"ha\"yı (\"...mü ha?\") kaba buluyor. AMA gülme (\"Ha ha ha!\"), hecelenmiş kelime (\"Ha-tır-la\")\n  ve cümle başındaki anlama ünlemi (\"Ha, o mu?\", \"Ha şimdi anladım!\") sorun DEĞİLDİR.\n- Uygunsuz çağrışım: uyuşturucu izlenimi veren görüntüler (helezon gözler), ilişki/evlilik,\n  fal/büyü, dövme/piercing, politik göndermeler, müstehcen çağrışımlı espriler.\n- Yaş grubuna uygunluk: hedef kitlenin anlayamayacağı kavramlar.\n- Telif / reklam / RTÜK: gerçek marka ve mekân adları (reklam sayılır), film/eser göndermeleri.\n- Yabancı kelimeler: Türkçesini öner (\"Önce bir star gibi yaşayacaksın\" -> \"Önce bir dünya yıldızı gibi\n  yaşayacaksın\", \"One\" -> \"Bir\", \"Yey\" -> \"Yaşasın\", \"cool\" -> \"havalı\").\n- Fazlalık / gereksiz uzatma: aynı anlamı daha kısa veren ifade (\"yalı dairene\" -> \"yalına\",\n  \"tekrar yeniden\" -> \"yeniden\"), gereksiz tekrar eden kelimeler.\n- Kelime seçimi ve üslup: daha doğru/açık ifade,\n  daha doğru/açık ifade.\n- Dil bilgisi ve yazım hataları (TDK yazımı: \"herkez\" -> \"herkes\", \"tabi ki\" -> \"tabii ki\", ayrı/bitişik\n  yazılan \"de/da\", \"ki\", \"mi\" ekleri, yanlış ek kullanımı: \"kostümleri\" -> \"kostümlerini\").\n- Tekrar / fazla kullanım: aynı kelime ya da replik çok tekrarlanıyorsa.\n- Mantık / tutarlılık: sahneler arası çelişki, sebebi açıklanmayan durumlar, sinopsis ile hikâye\n  uyumsuzluğu, atlanan sahne numaraları, eksik şarkı sözleri.\n\nKurallar:\n- Ekibin geçmiş notları aşağıda verilmişse, onların hassasiyetini ve önerme biçimini örnek al.\n- TİTİZ ol: verilen aralıktaki her paragrafı tek tek, satır satır incele. Ekibin işaretleyeceği her\n  sorunu VE senaryoyu iyileştirecek her fırsatı (fazlalık, yabancı kelime, yazım, daha akıcı/çocuğa\n  uygun ifade) işaretle. Kesin sorunlarda severity \"orta\" ya da \"yuksek\", iyileştirme önerilerinde\n  \"dusuk\" kullan. Bir sahnede birden çok sorun varsa her birini ayrı bulgu yap.\n- Açıkça zararsız olanları işaretleme: gülme (\"Ha ha ha!\"), karakter adları, sahne başlıkları.\n- \"quote\" alanı, paragraf metninden HARFİ HARFİNE kopyalanmış, olabildiğince kısa bir parça olmalı\n  (yalnızca değişmesi gereken kelime ya da ifade; tüm cümle değil).\n- \"suggestions\": her öneri bir nesne: \"text\" quote'un yerine doğrudan yazılacak metin; \"kaynak\" ve \"ref\".\n  * Bellek'te aynı ya da çok benzer bir duruma ekibin yaptığı bir düzeltme varsa, önce onu uyarlayarak\n    öner: kaynak \"bellek\", ref = o notun geldiği bölüm adı (ör. \"KUCHO-S1E51-DışSes-Senaryo\").\n  * Ayrıca sahnenin amacını, karakterin sesini ve hikâyenin akışını koruyarak boşluğu dolduran kendi\n    önerini ver: kaynak \"yeni\", ref \"\". Bir eylemi değiştiriyorsan hikâyede aynı işlevi gören güvenli bir\n    eylem seç (ör. kablo kesmek yerine butona basmak; ikisi de makineyi durdurur).\n  Toplam 1-3 öneri; her biri cümlenin geri kalanıyla dilbilgisi olarak uyumlu olmalı. Tamamen çıkarmak en iyisiyse önerilerden biri \"\" olabilir. Sorun metin\n  değişikliğiyle çözülemiyorsa (ör. şarkı sözü eksik, sahne yeniden kurgulanmalı) boş liste ver\n  ve ne yapılması gerektiğini \"reason\"da yaz.\n- \"reason\": ekibin not üslubunda kısa, net Türkçe açıklama (ör. \"Taklit edilebilir olumsuz örnek.\n  Vuvuzelayı kulağının dibinde çalmamalı.\").\n- Karakter adları, sahne başlıkları ve teknik yönergeler (CUT, geniş plan) kendi başına sorun değildir.",
+ "aiCategories": [
+  "çocuk güvenliği",
+  "kötü örnek davranış",
+  "şiddet / sert söylem",
+  "hakaret / alay",
+  "argo / kaba dil",
+  "uygunsuz çağrışım",
+  "yaş grubuna uygunluk",
+  "telif / reklam / RTÜK",
+  "kelime seçimi / üslup",
+  "dil bilgisi / yazım",
+  "tekrar / fazla kullanım",
+  "mantık / tutarlılık",
+  "fazlalık / gereksiz uzatma",
+  "yabancı kelime",
+  "iyileştirme",
+  "diğer"
+ ],
+ "memoryCategories": [
+  "çocuk güvenliği",
+  "kötü örnek davranış",
+  "şiddet / sert söylem",
+  "hakaret / alay",
+  "argo / kaba dil",
+  "uygunsuz çağrışım",
+  "yaş grubuna uygunluk",
+  "telif / reklam / RTÜK",
+  "kelime seçimi / üslup",
+  "dil bilgisi / yazım",
+  "tekrar / fazla kullanım",
+  "mantık / tutarlılık",
+  "sinopsis uyumu",
+  "karakter / isim",
+  "format / sahne numarası",
+  "eksik içerik",
+  "diğer"
+ ],
+ "categoryHints": [
+  [
+   "telif / reklam / RTÜK",
+   "copyright|telif|reklam|rtük|marka"
+  ],
+  [
+   "çocuk güvenliği",
+   "taklit|tehlikeli|kulağına|kulağının|elektrik|priz|kibrit|bıçak|yüksekten|nefes al|ağzı dolu|ağzında"
+  ],
+  [
+   "uygunsuz çağrışım",
+   "uyuştur|madde altında|alkol|sigara|kumar|helezon|sarhoş|romantik|öpücük|ilişki|evlen|fal |büyücü|piercing|dövme|politik|siyasi|popo"
+  ],
+  [
+   "şiddet / sert söylem",
+   "şiddet|tehdit|sert söylem|sert bir|korkut|korkunç|dövü|kavga"
+  ],
+  [
+   "kötü örnek davranış",
+   "olumsuz|kötü örnek|saygısız|zorbal|kandır|fırlat"
+  ],
+  [
+   "hakaret / alay",
+   "hakaret|dalga geç|aşağıla|alay"
+  ],
+  [
+   "argo / kaba dil",
+   "yasaklı kelime|argo|kaba|küfür|nida|hoş olmayan|hitap"
+  ],
+  [
+   "yaş grubuna uygunluk",
+   "hedef kitle|anlayamaya|kavram"
+  ],
+  [
+   "sinopsis uyumu",
+   "synops|sinops"
+  ],
+  [
+   "format / sahne numarası",
+   "sahne numara|numarasını|sahne \\d+.{0,30}(atlıyor|sonra gelmeli)|bölümün adı"
+  ],
+  [
+   "karakter / isim",
+   "ismini|isim ile|karakterin adı|karakter ismi|adını"
+  ],
+  [
+   "eksik içerik",
+   "şarkı söz|ekleyelim|eklenmeli|eklenmemiş|eksik|belirtelim"
+  ],
+  [
+   "tekrar / fazla kullanım",
+   "tekrar|fazla kullan|çok kullan|fazla olmuş|fazladan"
+  ],
+  [
+   "dil bilgisi / yazım",
+   "[”\\\"’']\\s*olmalı|yazım|imla|dil bilgisi|gramer"
+  ],
+  [
+   "kelime seçimi / üslup",
+   "daha uygun|daha doğru|daha açıklayıcı|denilirse|denilebilir|türkçe|söylem|terim|sound"
+  ],
+  [
+   "mantık / tutarlılık",
+   "tutarl|mantık|bağlantı|saçma|netleştir|devamlılık|anlaşılm|neden|senaryoya göre|anlamalıyız|kimlerden|olmalı"
+  ]
+ ]
+}

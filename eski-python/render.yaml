@@ -1,0 +1,18 @@
+# Render.com "Blueprint" — depoyu Render'a bağlayınca bu ayarlarla kurulur.
+services:
+  - type: web
+    name: senaryo-asistani
+    runtime: docker
+    plan: starter            # kalıcı disk ücretsiz planda yok
+    healthCheckPath: /saglik
+    disk:
+      name: senaryo-verisi
+      mountPath: /data
+      sizeGB: 1
+    envVars:
+      - key: SENARYO_TAKIM_SIFRESI
+        sync: false          # kurulumda Render sizden ister
+      - key: ANTHROPIC_API_KEY
+        sync: false          # isteğe bağlı: sitede otomatik Claude incelemesi için
+      - key: SENARYO_ASISTANI_DATA
+        value: /data

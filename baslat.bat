@@ -1,11 +1,12 @@
 @echo off
 chcp 65001 >nul
 cd /d "%~dp0"
-if not exist ".venv\Scripts\python.exe" (
-  echo Ilk kurulum yapiliyor, bu bir kez birkac dakika surer...
-  py -3 -m venv .venv 2>nul || python -m venv .venv
-  ".venv\Scripts\python.exe" -m pip install --upgrade pip >nul
-  ".venv\Scripts\python.exe" -m pip install -r requirements.txt || (echo Kurulum basarisiz. & pause & exit /b 1)
-)
-".venv\Scripts\python.exe" baslat.py
+rem Senaryo Asistani'ni acar. Ilk calistirmada kurulum yapar (bir kez, birkac dakika).
+where node >nul 2>nul || (echo Node.js bulunamadi. https://nodejs.org adresinden LTS surumunu kurun. & pause & exit /b 1)
+if not exist "node_modules" (echo Ilk kurulum yapiliyor... & call npm install || (echo Kurulum basarisiz. & pause & exit /b 1))
+if not exist ".env" call npm run anahtar
+if not exist "frontend\out\index.html" (echo Arayuz hazirlaniyor... & call npm run build || (pause & exit /b 1))
+if not defined PORT set PORT=8765
+start "" cmd /c "timeout /t 3 >nul & start http://127.0.0.1:%PORT%"
+call npm start
 pause

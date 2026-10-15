@@ -1,10 +1,10 @@
 #!/bin/bash
-# macOS: Finder'da çift tıklayarak çalıştırın (ilk seferde: sağ tık > Aç).
+# macOS: Finder'da çift tıklayın (ilk seferde sağ tık > Aç). İlk çalıştırmada kurulum yapar.
 cd "$(dirname "$0")" || exit 1
-if [ ! -x ".venv/bin/python" ]; then
-  echo "İlk kurulum yapılıyor, bu bir kez birkaç dakika sürer..."
-  python3 -m venv .venv || { echo "Python 3 bulunamadı: https://www.python.org/downloads/"; read -r; exit 1; }
-  .venv/bin/python -m pip install --upgrade pip >/dev/null
-  .venv/bin/python -m pip install -r requirements.txt || { echo "Kurulum başarısız."; read -r; exit 1; }
-fi
-.venv/bin/python baslat.py
+command -v node >/dev/null || { echo "Node.js bulunamadı: https://nodejs.org (LTS)"; read -r; exit 1; }
+[ -d node_modules ] || { echo "İlk kurulum yapılıyor..."; npm install || { read -r; exit 1; }; }
+[ -f .env ] || npm run anahtar
+[ -f frontend/out/index.html ] || { echo "Arayüz hazırlanıyor..."; npm run build || { read -r; exit 1; }; }
+export PORT="${PORT:-8765}"
+(sleep 3; open "http://127.0.0.1:$PORT") &
+npm start

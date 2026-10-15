@@ -1,17 +1,13 @@
-# Senaryo Asistanı — ekip sunucusu
-FROM python:3.12-slim
-
-ENV PYTHONUNBUFFERED=1 \
-    PYTHONIOENCODING=utf-8 \
-    SENARYO_ASISTANI_DATA=/data \
-    PORT=8000
-
+# Senaryo Asistanı — ekip sunucusu (Fastify + Next.js)
+FROM node:24-slim
 WORKDIR /app
-COPY requirements.txt .
-RUN pip install --no-cache-dir -r requirements.txt
+COPY package.json package-lock.json ./
+COPY backend/package.json backend/
+COPY frontend/package.json frontend/
+RUN npm ci
 COPY . .
-
-# /data kalıcı disk olmalı (Bellek, kurallar, senaryolar burada tutulur)
+RUN NEXT_TELEMETRY_DISABLED=1 npm run build
+ENV HOST=0.0.0.0 PORT=8000 SENARYO_ASISTANI_DATA=/data
 VOLUME ["/data"]
 EXPOSE 8000
-CMD ["python", "sunucu.py"]
+CMD ["npm", "start"]

@@ -1,0 +1,22 @@
+{
+  "name": "senaryo-asistani",
+  "private": true,
+  "workspaces": [
+    "backend",
+    "frontend"
+  ],
+  "scripts": {
+    "dev": "concurrently -k -n api,web -c blue,magenta \"npm run dev -w backend\" \"npm run dev -w frontend\"",
+    "build": "npm run build -w frontend",
+    "start": "tsx backend/src/server.ts",
+    "anahtar": "tsx backend/src/keygen.ts",
+    "mcp": "tsx backend/src/mcp-stdio.ts",
+    "mcp:kur": "tsx backend/src/mcp-install.ts"
+  },
+  "devDependencies": {
+    "concurrently": "^9.2.1"
+  },
+  "allowScripts": {
+    "esbuild": true
+  }
+}

@@ -1,0 +1,6 @@
+.venv
+**/__pycache__
+*.pyc
+.git
+.claude
+ekip_sifresi.txt

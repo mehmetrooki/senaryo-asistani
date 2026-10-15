@@ -31,14 +31,15 @@ Başka bilgisayarlara hiçbir şey kurmak gerekmez; Windows ya da Mac fark etmez
 2. **New + → Blueprint** seçin, `senaryo-asistani` deposunu seçin. Render, depodaki `render.yaml`
    dosyasını okuyup her şeyi kendisi ayarlar.
 3. Sizden iki değer ister:
-   - **SENARYO_TAKIM_SIFRESI**: siteye giriş şifresi. Güçlü bir şifre belirleyin; ekibe bunu vereceksiniz.
+   - **SENARYO_ERISIM_ANAHTARI**: bilgisayarınızdaki `.env` dosyasında duran 256 baytlık anahtar
+     (512 karakter). Olduğu gibi yapıştırın; ekip bu anahtarla giriş yapar.
    - **ANTHROPIC_API_KEY**: isteğe bağlı. Girerseniz site, yüklenen her senaryoyu Claude ile otomatik
      inceler. Boş bırakabilirsiniz; Claude Desktop/claude.ai bağlayıcısıyla da inceleme yapılabilir.
 4. **Apply** deyin. Birkaç dakika sonra siteniz `https://senaryo-asistani-xxxx.onrender.com` gibi bir
    adreste açılır.
 
 ### 3. Mevcut verinizi siteye taşıyın
-Bilgisayarınızdaki uygulamada şimdiye kadar biriken Bellek (342+ not), kurallar ve senaryolar kaybolmaz:
+Bilgisayarınızdaki uygulamada şimdiye kadar biriken Bellek (355 not), kurallar ve senaryolar kaybolmaz:
 1. Kendi bilgisayarınızda uygulamayı açın (`baslat.bat`) → **Ayarlar → Yedeği indir**.
 2. Siteye girin → **Ayarlar → Yedek yükle ve birleştir** → indirdiğiniz .zip'i seçin.
 
@@ -46,7 +47,7 @@ Arkadaşınızın bilgisayarında da veri varsa o da aynı şekilde yükler. Ver
 silinmez, aynı bölüm iki kez eklenmez.
 
 ### 4. Ekibe dağıtın
-- Arkadaşlarınıza site adresini ve ekip şifresini verin. Girişte herkes adını yazar; eklediği bölümler ve
+- Arkadaşlarınıza site adresini ve erişim anahtarını verin. Girişte herkes adını yazar; eklediği bölümler ve
   senaryolar adıyla görünür (👤 Ali, 👤 Zümrüt…).
 - "Tıkla çalıştır" kolaylığı için: tarayıcıda siteyi açıp **Paylaş → Masaüstüne kısayol** (Edge/Chrome:
   ⋮ → Kaydet ve paylaş → Kısayol oluştur → "Pencere olarak aç") ya da Safari'de **Dosya → Dock'a ekle**.
@@ -69,9 +70,9 @@ Render diski kalıcıdır, ama yine de ayda bir **Ayarlar → Yedeği indir** il
 
 1. Her zaman açık kalacak bir bilgisayarda bu klasörde **`ekip_sunucusu.bat`** (Mac: `ekip_sunucusu.command`)
    dosyasına çift tıklayın.
-2. İlk açılışta bir ekip şifresi belirlemeniz istenir.
-3. Pencerede `Aynı ağdaki herkes: http://192.168.x.x:8000` gibi bir adres yazar. Ofisteki herkes bu
-   adresi tarayıcısına yazıp ekip şifresiyle girer.
+2. İlk açılışta `.env` içinde erişim anahtarı üretilir; ekip bu anahtarla girer.
+3. Ofisteki herkes `http://<bu bilgisayarın IP adresi>:8000` adresini tarayıcısına yazıp erişim
+   anahtarıyla girer (IP adresini Windows'ta `ipconfig`, Mac'te Sistem Ayarları → Ağ gösterir).
 4. Windows "erişime izin verilsin mi" diye sorarsa **Özel ağlar** için izin verin.
 
 Bu yolda bilgisayarınızdaki mevcut veri olduğu gibi kullanılır; taşımaya gerek yoktur. Pencere açık
@@ -79,7 +80,7 @@ kaldıkça site çalışır.
 
 ---
 
-## Kişisel kullanım hâlâ mümkün
-`baslat.bat` / `baslat.command` eskisi gibi yalnızca sizin bilgisayarınızda, giriş istemeden çalışır.
+## Kişisel kullanım
+`baslat.bat` / `baslat.command` yalnızca sizin bilgisayarınızda (127.0.0.1) çalışır; giriş yine erişim anahtarıyladır.
 Kişisel kurulumla ekip sitesi arasında veri taşımak için **Ayarlar → Yedeği indir / Yedek yükle ve
 birleştir** kullanılır.

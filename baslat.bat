@@ -24,9 +24,9 @@ if not exist ".env" call npm run anahtar
 if not exist "frontend\out\index.html" (echo Arayuz hazirlaniyor... & call npm run build || (pause & exit /b 1))
 if not defined PORT set PORT=8765
 echo.
-echo Senaryo Asistani aciliyor: http://127.0.0.1:%PORT%
+echo Senaryo Asistani aciliyor (tarayici kendiliginden acilir)...
 echo Bu pencere acik kaldikca uygulama calisir. Kapatmak icin pencereyi kapatin.
 echo Giris anahtari: bu klasordeki .env dosyasinda (SENARYO_ERISIM_ANAHTARI).
-if not defined SA_TARAYICI_ACMA start "" cmd /c "timeout /t 4 >nul & start http://127.0.0.1:%PORT%"
+if not defined SA_TARAYICI_ACMA set SA_TARAYICI=1
 call npm start
 pause

@@ -233,5 +233,20 @@ if (fs.existsSync(out)) {
 }
 
 if (db.migrated) bg(svc.rescanAllRules());
-await app.listen({ port: PORT, host: HOST });
-console.log(`Senaryo Asistanı API: http://${HOST === "0.0.0.0" ? "127.0.0.1" : HOST}:${PORT}${fs.existsSync(out) ? "" : "  (arayüz derlenmemiş: npm run build)"}`);
+// Port doluysa (ör. eski bir sürüm hâlâ açıksa) sıradaki boş porta geç
+let port = PORT;
+for (let i = 0; ; i++) {
+  try { await app.listen({ port, host: HOST }); break; }
+  catch (e: any) {
+    if (e.code !== "EADDRINUSE" || i >= 20) throw e;
+    console.log(`Port ${port} kullanımda, ${port + 1} deneniyor...`);
+    port++;
+  }
+}
+const url = `http://127.0.0.1:${port}`;
+console.log(`Senaryo Asistanı: ${url}${fs.existsSync(out) ? "" : "  (arayüz derlenmemiş: npm run build)"}`);
+if (process.env.SA_TARAYICI === "1") {
+  const { spawn } = await import("node:child_process");
+  const [cmd, args] = process.platform === "win32" ? ["cmd", ["/c", "start", "", url]] : [process.platform === "darwin" ? "open" : "xdg-open", [url]];
+  spawn(cmd, args, { detached: true, stdio: "ignore" }).unref();
+}

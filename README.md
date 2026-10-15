@@ -19,8 +19,12 @@ Pencere açık kaldıkça uygulama çalışır.
 
 İlk açılışta işletim sistemi bir kez onay isteyebilir (imzasız betik):
 - **Windows:** "Windows bilgisayarınızı korudu" çıkarsa **Ek bilgi → Yine de çalıştır**.
-- **Mac:** "doğrulanamadı" uyarısı çıkarsa **Sistem Ayarları → Gizlilik ve Güvenlik → Yine de Aç**
-  (ya da dosyaya sağ tık → **Aç**). Sonraki açılışlarda sorulmaz.
+- **Mac:** macOS internetten inen imzasız betiklere karantina işareti koyar; "hasar görmüş" ya da
+  "doğrulanamadı" uyarısı çıkarsa **Çöp Sepeti'ne taşımayın**, bir kez şunu yapın:
+  1. **Terminal**'i açın (Spotlight: ⌘+Boşluk → "Terminal").
+  2. `xattr -cr ` yazın (sonunda bir boşluk bırakın), ZIP'ten çıkan klasörü Finder'dan Terminal penceresine
+     sürükleyip bırakın ve Enter'a basın. Örnek: `xattr -cr ~/Downloads/senaryo-asistani-main`
+  3. Artık `baslat.command`'a çift tıklayın. Bu adım bir kez yapılır; sonraki açılışlarda sorulmaz.
 
 **Giriş:** adınızı ve `.env` dosyasındaki `SENARYO_ERISIM_ANAHTARI` değerini girin. Anahtarı bilen
 herkes adıyla üye olur (Ayarlar → Üyeler). Anahtarı yenilemek için `npm run anahtar -- --yeni`

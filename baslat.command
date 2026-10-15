@@ -25,8 +25,8 @@ fi
 [ -f frontend/out/index.html ] || { echo "Arayüz hazırlanıyor..."; npm run build || { read -r; exit 1; }; }
 export PORT="${PORT:-8765}"
 echo
-echo "Senaryo Asistanı açılıyor: http://127.0.0.1:$PORT"
+echo "Senaryo Asistanı açılıyor (tarayıcı kendiliğinden açılır)..."
 echo "Bu pencere açık kaldıkça uygulama çalışır. Kapatmak için pencereyi kapatın."
 echo "Giriş anahtarı: bu klasördeki .env dosyasında (SENARYO_ERISIM_ANAHTARI)."
-(sleep 4; open "http://127.0.0.1:$PORT") &
+export SA_TARAYICI=1   # sunucu hazır olunca doğru adresle tarayıcıyı açar
 npm start

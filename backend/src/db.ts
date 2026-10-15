@@ -100,6 +100,24 @@ function rebase(d: Row, sub: string): Row {
   return d;
 }
 
+// ---------------------------------------------------------------- ekip yönergeleri (Claude her incelemede uyar)
+const DEFAULT_GUIDELINES = [
+  "Normal olmayan, alışılmadık HER eylem tehlikeli olabilir ve çocuklara kötü örnek olur; bunları inanılmaz ısrarcı şekilde denetle. "
+  + "Örnek: \"yangın tüpünü fark eder ve panzehiri yangın tüpünün içine sıkarak yanına alır\". Nesnelerin amacı dışında kullanılması, "
+  + "maddelerin karıştırılması/sıkılması/içilmesi, güvenlik ekipmanlarıyla oynanması, bilinmeyen bitki-meyve-sıvının yenmesi/içilmesi, "
+  + "elektrik hattına dokunulması gibi her durumu işaretle (ciddiyet: yuksek). Şüphede kalırsan işaretle ve sahnenin amacını koruyan "
+  + "güvenli bir eylem öner.",
+];
+export function getGuidelines(): string[] {
+  const r = get("SELECT value FROM meta WHERE key='yonergeler'");
+  return r ? JSON.parse(r.value) : DEFAULT_GUIDELINES;
+}
+export function setGuidelines(items: string[]) {
+  const clean = items.map((s) => String(s).trim()).filter(Boolean);
+  run("INSERT OR REPLACE INTO meta (key, value) VALUES ('yonergeler', ?)", J(clean));
+  return clean;
+}
+
 // ---------------------------------------------------------------- üyeler
 export function touchMember(name: string) {
   run(`INSERT INTO members (name, first_login, last_login, logins) VALUES (?,?,?,1)

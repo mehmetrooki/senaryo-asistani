@@ -184,6 +184,10 @@ app.post("/api/lessons/:id/rule", async (req: any) => {
     source: "ogrenilen", status: "aktif", example: l.old_text.slice(0, 300), lesson_id: l.id });
 });
 
+// ---------------------------------------------------------------- ekip yönergeleri
+app.get("/api/yonergeler", async () => db.getGuidelines());
+app.put("/api/yonergeler", async (req: any) => db.setGuidelines(Array.isArray(req.body?.items) ? req.body.items : []));
+
 // ---------------------------------------------------------------- kurallar
 app.get("/api/rules", async () => db.listRules());
 app.post("/api/rules", async (req: any) => {

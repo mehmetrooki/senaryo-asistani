@@ -21,6 +21,7 @@ export default function Kurallar() {
 
   return (
     <section className="view active"><div className="page"><div className="page-inner">
+      <Guidelines />
       <div className="box">
         <h3>Onay bekleyen öğrenilenler</h3>
         <p className="sub">Yüklediğiniz belgelerdeki izlenen değişikliklerden ve aynı senaryonun önceki sürümleriyle karşılaştırmadan çıkarıldı. Onayladıklarınız bundan sonraki taramalarda kural olarak kullanılır.</p>
@@ -83,5 +84,34 @@ export default function Kurallar() {
         </tbody></table>
       </div>
     </div></div></section>
+  );
+}
+
+/** Ekip yönergeleri: Claude'a her incelemede en öncelikli talimat olarak gider. */
+function Guidelines() {
+  const [items, setItems] = useState<string[] | null>(null), [dirty, setDirty] = useState(false);
+  useEffect(() => { api<string[]>("/api/yonergeler").then(setItems); }, []);
+  if (!items) return null;
+  const set = (next: string[]) => { setItems(next); setDirty(true); };
+  return (
+    <div className="box">
+      <h3>Ekip yönergeleri</h3>
+      <p className="sub">Claude her senaryoyu incelerken bu yönergelere kesin talimat olarak uyar ve bunlara giren her durumu ısrarla işaretler.
+        Ekibin hassasiyetlerini buraya kendi cümlelerinizle yazın; örnek vermek en etkili yoldur.</p>
+      <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
+        {items.map((t, i) => (
+          <div key={i} style={{ display: "flex", gap: 8, alignItems: "flex-start" }}>
+            <textarea value={t} rows={Math.min(6, Math.max(2, Math.ceil(t.length / 110)))} style={{ flex: 1, resize: "vertical" }}
+              onChange={(e) => set(items.map((x, j) => (j === i ? e.target.value : x)))} />
+            <button className="ghost" title="Bu yönergeyi sil" onClick={() => set(items.filter((_, j) => j !== i))}>✕</button>
+          </div>))}
+      </div>
+      <div className="form-row" style={{ marginTop: 10, maxWidth: 420 }}>
+        <button onClick={() => set([...items, ""])}>+ Yönerge ekle</button>
+        <button className="primary" disabled={!dirty} onClick={async () => {
+          setItems(await api<string[]>("/api/yonergeler", { method: "PUT", json: { items } })); setDirty(false); toast("Yönergeler kaydedildi; bir sonraki incelemeden itibaren uygulanır.");
+        }}>Kaydet</button>
+      </div>
+    </div>
   );
 }

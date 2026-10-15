@@ -48,7 +48,9 @@ function houseExamples(limit = 60) {
 /** Sistem istemi; kurallar + Bellek bölümü uzun olduğu için önbelleğe alınır. */
 export function buildSystem() {
   const blocks: any[] = [{ type: "text", text: data.systemPrompt }], extra: string[] = [];
-  const ex = houseExamples(), lessons = promptExamples();
+  const ex = houseExamples(), lessons = promptExamples(), rules = db.getGuidelines();
+  if (rules.length) extra.push("EKİP YÖNERGELERİ — kesin talimatlar; her incelemede uygula, bunlara giren her durumu ısrarla işaretle:\n"
+    + rules.map((r) => "- " + r).join("\n"));
   if (ex) extra.push("Ekibin kural listesi (bu ifadeler görüldüğünde benzer öneriler ver):\n" + ex);
   if (lessons) extra.push("BELLEK — ekibin geçmiş senaryolara düştüğü notlar ve yaptığı düzeltmeler. Yeni senaryoda aynı türden "
     + "durumları aynı hassasiyetle işaretle; bölüme özgü notları (ör. belirli bir karakterin adı) genelleme:\n\n" + lessons);
@@ -86,7 +88,8 @@ export async function analyze(texts: string[], progress?: (d: number, t: number)
   const run = (c: typeof paras) => callJson(system, [script, { type: "text", text:
     `Yukarıdaki senaryonun YALNIZCA [${c[0][0]}] ile [${c.at(-1)![0]}] arasındaki paragraflarını ayrıntılı incele (sahne bağlamı için `
     + "senaryonun geri kalanına bakabilirsin). Paragraf başındaki [sayı] paragraf numarasıdır; bulgularda bu numarayı kullan. "
-    + "Bu aralıkta bulduğun her sorunu ve iyileştirme fırsatını listele." }], SCHEMA, 64000, "high").then((r) => r ?? { findings: [] });
+    + "Bu aralıkta bulduğun her sorunu ve iyileştirme fırsatını listele. EKİP YÖNERGELERİ'ne giren hiçbir durumu atlama; "
+    + "özellikle normal olmayan, taklit edilebilir her eylemi tek tek kontrol et." }], SCHEMA, 64000, "high").then((r) => r ?? { findings: [] });
   const results: any[] = [];
   let done = 0;
   const tick = () => progress?.(++done, chunks.length);

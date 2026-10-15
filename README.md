@@ -7,17 +7,20 @@ geri veren araç. Aynı veriler **MCP** ile Claude Desktop / claude.ai'den de ku
 
 > Ekip olarak kullanmak (herkes aynı Bellek ve senaryoları görsün): [EKIP-KURULUMU.md](EKIP-KURULUMU.md)
 
-## Çalıştırma
+## Çalıştırma (tek tık)
 
-Gerekli: [Node.js](https://nodejs.org) 22.5+ (LTS önerilir).
+1. GitHub'da **Code → Download ZIP** ile indirin ve klasöre çıkarın (ZIP'in içinden çalıştırmayın).
+2. **Windows:** `baslat.bat`'a çift tıklayın. · **Mac:** `baslat.command`'a çift tıklayın.
 
-| Sistem  | |
-|---------|---|
-| Windows | `baslat.bat`'a çift tıklayın |
-| macOS   | `baslat.command`'a çift tıklayın (ilk seferde sağ tık → Aç; gerekirse `chmod +x baslat.command`) |
+Başka hiçbir şey kurmanız gerekmez: bilgisayarda Node.js yoksa betik, yönetici izni istemeden proje
+klasörüne indirir; paketleri kurar, `.env` içinde **256 baytlık erişim anahtarı** üretir, arayüzü derler
+ve tarayıcıda `http://127.0.0.1:8765` adresini açar. İlk açılış birkaç dakika, sonrakiler birkaç saniye sürer.
+Pencere açık kaldıkça uygulama çalışır.
 
-İlk açılışta paketler kurulur, `.env` içinde **256 baytlık erişim anahtarı** üretilir ve arayüz
-derlenir. Tarayıcıda `http://127.0.0.1:8765` açılır.
+İlk açılışta işletim sistemi bir kez onay isteyebilir (imzasız betik):
+- **Windows:** "Windows bilgisayarınızı korudu" çıkarsa **Ek bilgi → Yine de çalıştır**.
+- **Mac:** "doğrulanamadı" uyarısı çıkarsa **Sistem Ayarları → Gizlilik ve Güvenlik → Yine de Aç**
+  (ya da dosyaya sağ tık → **Aç**). Sonraki açılışlarda sorulmaz.
 
 **Giriş:** adınızı ve `.env` dosyasındaki `SENARYO_ERISIM_ANAHTARI` değerini girin. Anahtarı bilen
 herkes adıyla üye olur (Ayarlar → Üyeler). Anahtarı yenilemek için `npm run anahtar -- --yeni`

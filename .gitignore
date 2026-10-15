@@ -7,3 +7,5 @@ ekip_sifresi.txt
 node_modules/
 frontend/.next/
 frontend/out/
+.node/
+.node-tmp/

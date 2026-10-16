@@ -36,3 +36,6 @@ export function readSession(v?: string): string | null {
 
 /** Claude bağlayıcısının gizli yolu (anahtardan türetilir; anahtar değişirse bu da değişir). */
 export const mcpToken = () => hmac("mcp", "baglanti").slice(0, 32);
+
+/** Anahtarın son 4 karakteri — hangi kurulumun anahtarının kullanıldığını ayırt etmek için (gizli değeri açığa çıkarmaz). */
+export const keyHint = (k = accessKey()) => k.replace(/\s+/g, "").slice(-4).toLowerCase();

@@ -44,10 +44,22 @@ app.addHook("onRequest", async (req, reply) => {
   (req as any).user = name;
 });
 
+const LOCAL = HOST === "127.0.0.1" || HOST === "localhost";
+const ENV_PATH = path.join(ROOT, ".env");
+// Giriş ekranı için: bu kurulumun anahtarı nerede, hangi karakterlerle bitiyor (yalnızca kişisel kullanımda klasör gösterilir)
+app.get("/api/giris-bilgi", async () => ({ ipucu: auth.keyHint(), env: LOCAL ? ENV_PATH : null }));
+
 app.post("/api/giris", async (req, reply) => {
   const { ad = "", anahtar = "" } = (req.body ?? {}) as any;
   const name = String(ad).split(/\s+/).join(" ").trim().slice(0, 40);
-  if (!name || !auth.checkKey(String(anahtar))) throw fail(401, "Ad ya da erişim anahtarı hatalı");
+  if (!name) throw fail(401, "Adınızı yazın.");
+  if (!auth.checkKey(String(anahtar))) {
+    const given = String(anahtar).replace(/\s+/g, "");
+    const why = !/^[0-9a-f]{512}$/i.test(given)
+      ? `Girdiğiniz değer ${given.length} karakter; erişim anahtarı 512 karakter olmalı (eksik ya da fazla kopyalanmış olabilir).`
+      : `Girdiğiniz anahtar …${auth.keyHint(given)} ile bitiyor, bu kurulumun anahtarı …${auth.keyHint()} ile bitiyor. Farklı bir kurulumun anahtarını girmiş ya da başka bir klasördeki .env dosyasını düzenlemiş olabilirsiniz; .env değiştiyse uygulamayı kapatıp yeniden açın.`;
+    throw fail(401, why);
+  }
   db.touchMember(name);
   reply.setCookie(auth.COOKIE, auth.makeSession(name), { path: "/", httpOnly: true, sameSite: "lax", secure: req.protocol === "https", maxAge: auth.MAX_AGE });
   return { ok: true, ad: name };
@@ -265,12 +277,16 @@ for (let i = 0; ; i++) {
   try { await app.listen({ port, host: HOST }); break; }
   catch (e: any) {
     if (e.code !== "EADDRINUSE" || i >= 20) throw e;
-    console.log(`Port ${port} kullanımda, ${port + 1} deneniyor...`);
+    const other = await fetch(`http://127.0.0.1:${port}/saglik`).then((r) => r.json()).catch(() => null);
+    console.log(other?.ok
+      ? `\n⚠ ${port} portunda başka bir Senaryo Asistanı zaten açık (kapatılmamış eski bir pencere olabilir). Eski tarayıcı sekmesi ONA bağlıdır\n  ve onun anahtarını ister. Eskisini kapatmak için o Terminal/komut penceresinde Ctrl+C'ye basın. Bu pencere ${port + 1} portunu kullanacak.\n`
+      : `Port ${port} kullanımda, ${port + 1} deneniyor...`);
     port++;
   }
 }
 const url = `http://127.0.0.1:${port}`;
 console.log(`Senaryo Asistanı: ${url}${fs.existsSync(out) ? "" : "  (arayüz derlenmemiş: npm run build)"}`);
+console.log(`Giriş anahtarı: ${ENV_PATH}  (…${auth.keyHint()} ile biter)`);
 if (process.env.SA_TARAYICI === "1") {
   const { spawn } = await import("node:child_process");
   const [cmd, args] = process.platform === "win32" ? ["cmd", ["/c", "start", "", url]] : [process.platform === "darwin" ? "open" : "xdg-open", [url]];

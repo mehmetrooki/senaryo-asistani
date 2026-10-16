@@ -209,3 +209,4 @@ pre{background:var(--panel-2);border:1px solid var(--line);border-radius:8px;pad
 .feed{display:flex;flex-direction:column;gap:10px}
 .right-head .row{flex-wrap:wrap;row-gap:8px}
 .right-head .seg button{padding:5px 10px}
+.login .hint{font-size:12px;color:var(--muted);line-height:1.5}

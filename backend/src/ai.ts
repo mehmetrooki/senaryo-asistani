@@ -61,13 +61,16 @@ export function buildSystem() {
   return blocks;
 }
 
+/** Reddedilirse sunucu tarafında yedek modele geçiş: yalnızca destekleyen modellerde gönderilir (ör. Haiku'da yok). */
+const supportsFallback = (m: string) => /^claude-(opus-5|fable-5|sonnet-5-5)/.test(m);
+
 async function callJson(system: any[], content: any, schema: object, maxTokens = 64000, effort = "medium"): Promise<any | null> {
+  const model = loadConfig().model || "claude-opus-5-5";
   const stream = client().beta.messages.stream({
-    model: loadConfig().model || "claude-opus-5-5",
+    model,
     max_tokens: maxTokens,
     system,
-    betas: ["server-side-fallback-2026-07-01"],
-    fallbacks: "default",
+    ...(supportsFallback(model) ? { betas: ["server-side-fallback-2026-07-01"], fallbacks: "default" } : {}),
     output_config: { effort, format: { type: "json_schema", schema } },
     messages: [{ role: "user", content }],
   } as any);
@@ -103,6 +106,7 @@ export async function analyze(texts: string[], progress?: (d: number, t: number)
   const results: any[] = [];
   let done = 0;
   const tick = () => progress?.(++done, chunks.length);
+  progress?.(0, chunks.length); // ilk yanıt gelene kadar "Kurallar taranıyor" yazısı kalmasın
   if (chunks.length) { results.push(await run(chunks[0])); tick(); } // ilk istek önbelleği doldurur
   for (let i = 1; i < chunks.length; i += 4) {
     for (const r of await Promise.all(chunks.slice(i, i + 4).map(run))) { results.push(r); tick(); }

@@ -253,6 +253,12 @@ if (fs.existsSync(out)) {
 }
 
 if (db.migrated) bg(svc.rescanAllRules());
+// Uygulama inceleme sırasında kapandıysa belge sonsuza kadar "inceleniyor" görünmesin
+for (const d of db.listDocuments()) {
+  if (d.status === "analiz" || d.status === "bekliyor") {
+    db.updateDocument(d.id, { status: "hazir", status_detail: "İnceleme yarıda kaldı (uygulama kapanmış olabilir). Yeniden tara ile tekrarlayın." });
+  }
+}
 // Port doluysa (ör. eski bir sürüm hâlâ açıksa) sıradaki boş porta geç
 let port = PORT;
 for (let i = 0; ; i++) {

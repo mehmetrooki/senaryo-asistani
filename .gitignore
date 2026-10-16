@@ -19,3 +19,5 @@ api-key*
 *.key
 .env.*
 !.env.example
+baslat-log.txt
+node.tar.gz

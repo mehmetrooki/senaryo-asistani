@@ -126,6 +126,18 @@ if (!get("SELECT 1 FROM meta WHERE key='notlar_tasindi'")) {
   run("INSERT OR REPLACE INTO meta (key, value) VALUES ('notlar_tasindi', '1')");
 }
 
+// 1.4: fiziksel tepki ve zorlama yönergeleri (bir kez eklenir; sonra Geliştir'den düzenlenebilir)
+if (!get("SELECT 1 FROM meta WHERE key='yonerge_1_4'")) {
+  for (const t of [
+    "Fiziksel / kaba tepkileri SERT şekilde denetle: karakterler dil çıkaramaz, tüküremez, taş atamaz; çimdikleme, ısırma, itip kakma, "
+    + "dürtme, kaba el hareketi, geğirme gibi her fiziksel tepkiyi işaretle (ciddiyet: yuksek) ve zararsız bir tepkiyle değiştir.",
+    "Karakterler başka karakterlere ZORLA bir şey yaptıramaz. İşkence, eziyet, birini alıkoymak, rehin almak, bir yere kapatmak, "
+    + "bağlamak, hapsetmek kesinlikle olamaz. \"Bunu yapacaksın\", \"zorundasın\", \"emrediyorum\" gibi dayatma dili de olamaz; "
+    + "rica ya da öneri diline çevir.",
+  ]) run("INSERT INTO notes (id, scope, kind, text, author, learn, created_at, updated_at) VALUES (?,?,?,?,?,1,?,?)", newId(), "genel", "yönerge", t, "Ekip", now(), now());
+  run("INSERT OR REPLACE INTO meta (key, value) VALUES ('yonerge_1_4', '1')");
+}
+
 const noteRow = (r: Row): Row => ({ ...r, learn: !!r.learn });
 export function addNote(n: { scope: string; text: string; kind?: string; doc_id?: string | null; paragraph?: number | null;
   start?: number | null; end?: number | null; quote?: string; author?: string; learn?: boolean }) {

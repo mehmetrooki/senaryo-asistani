@@ -92,7 +92,7 @@ export function scanParagraph(text: string, rules: any[]): Hit[] {
         if (!reps.includes(rep)) reps.push(rep);
       }
       hits.push({ start: s, end: e, original, suggestions: reps, category: rule.category, reason: rule.reason, rule_id: rule.id,
-        severity: ctx ? "dusuk" : ["şiddet", "tehlikeli davranış", "çocuk güvenliği"].includes(rule.category) ? "yuksek" : "orta" });
+        severity: ctx ? "dusuk" : ["şiddet", "tehlikeli davranış", "çocuk güvenliği", "fiziksel / kaba tepki", "zorlama / alıkoyma"].includes(rule.category) ? "yuksek" : "orta" });
     }
   }
   hits.sort((a, b) => a.start - b.start || b.end - b.start - (a.end - a.start));

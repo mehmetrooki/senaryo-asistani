@@ -1836,9 +1836,185 @@
    "reason": "Elektrik hattına/direğine dokunmak, asılmak ya da tırmanmak hayati tehlike; taklit edilebilir.",
    "match_type": "desen",
    "added": "1.3"
+  },
+  {
+   "pattern": "dil(?:ini|lerini)\\s+(?:[^\\s.!?…]+\\s+){0,2}?çıkar[a-zçğıöşüâîû’']*",
+   "match_type": "desen",
+   "category": "fiziksel / kaba tepki",
+   "reason": "Dil çıkarmak kaba ve alaycı bir hareket; çocuklar taklit eder.",
+   "replacements": [],
+   "added": "1.4"
+  },
+  {
+   "pattern": "tükür[a-zçğıöşüâîû’']*",
+   "match_type": "desen",
+   "category": "fiziksel / kaba tepki",
+   "reason": "Tükürmek kaba ve sağlıksız bir davranış; çocuklar taklit eder.",
+   "replacements": [],
+   "added": "1.4"
+  },
+  {
+   "pattern": "taş(?:ı|ları|lar)?\\s+(?:[^\\s.!?…]+\\s+){0,2}?(?:at(?:ar|ıp|arak|tı|tılar|maya|arlar)|fırlat[a-zçğıöşüâîû’']*)",
+   "match_type": "desen",
+   "category": "fiziksel / kaba tepki",
+   "reason": "Taş atmak tehlikeli; yaralanmaya yol açar, taklit edilebilir.",
+   "replacements": [],
+   "added": "1.4"
+  },
+  {
+   "pattern": "taşla(?:r|dı|dılar|yarak|yıp|maya|nır|rlar)(?![0-9a-zçğıöşüâîû'’])",
+   "match_type": "desen",
+   "category": "fiziksel / kaba tepki",
+   "reason": "Taşlamak şiddet içerir; taklit edilebilir.",
+   "replacements": [],
+   "added": "1.4"
+  },
+  {
+   "pattern": "çimdik(?:le[a-zçğıöşüâîû’']*|\\s+at[a-zçğıöşüâîû’']*)",
+   "match_type": "desen",
+   "category": "fiziksel / kaba tepki",
+   "reason": "Çimdik atmak fiziksel kabalık; olumsuz örnek.",
+   "replacements": [],
+   "added": "1.4"
+  },
+  {
+   "pattern": "(?:kolunu|elini|parmağını|kulağını|bacağını|kuyruğunu|burnunu|patisini|ayağını)\\s+ısır[a-zçğıöşüâîû’']*",
+   "match_type": "desen",
+   "category": "fiziksel / kaba tepki",
+   "reason": "Birini ısırmak fiziksel saldırı; olumsuz örnek.",
+   "replacements": [],
+   "added": "1.4"
+  },
+  {
+   "pattern": "(?:ittir|itekle|kakala)[a-zçğıöşüâîû’']*",
+   "match_type": "desen",
+   "category": "fiziksel / kaba tepki",
+   "reason": "İtip kakmak fiziksel kabalık; olumsuz örnek.",
+   "replacements": [],
+   "added": "1.4"
+  },
+  {
+   "pattern": "dürt(?:er|erek|erler|tü|tüler|meye|üyor|ünce)(?![0-9a-zçğıöşüâîû'’])",
+   "match_type": "desen",
+   "category": "fiziksel / kaba tepki",
+   "reason": "Birini dürtmek fiziksel kabalık; olumsuz örnek. Seslenmek ya da dokunmadan dikkat çekmek tercih edilir.",
+   "replacements": [],
+   "added": "1.4"
+  },
+  {
+   "pattern": "(?:kafa|dirsek|omuz)\\s+at(?:ar|ıp|arak|tı|maya)",
+   "match_type": "desen",
+   "category": "fiziksel / kaba tepki",
+   "reason": "Fiziksel saldırı; olumsuz örnek.",
+   "replacements": [],
+   "added": "1.4"
+  },
+  {
+   "pattern": "(?:kaba|ayıp|çirkin|hoş olmayan)\\s+(?:bir\\s+)?(?:el|parmak)\\s+hareket[a-zçğıöşüâîû’']*",
+   "match_type": "desen",
+   "category": "fiziksel / kaba tepki",
+   "reason": "Kaba el hareketi; olumsuz örnek.",
+   "replacements": [],
+   "added": "1.4"
+  },
+  {
+   "pattern": "burnunu\\s+karıştır[a-zçğıöşüâîû’']*",
+   "match_type": "desen",
+   "category": "fiziksel / kaba tepki",
+   "reason": "Kötü alışkanlık; çocuklara olumsuz örnek.",
+   "replacements": [],
+   "added": "1.4"
+  },
+  {
+   "pattern": "(?:geğir|osur|sümkür)[a-zçğıöşüâîû’']*",
+   "match_type": "desen",
+   "category": "fiziksel / kaba tepki",
+   "reason": "Kaba bedensel tepki; olumsuz örnek.",
+   "replacements": [],
+   "added": "1.4"
+  },
+  {
+   "pattern": "zorla\\s+[^\\s.!?…]+",
+   "match_type": "desen",
+   "category": "zorlama / alıkoyma",
+   "reason": "Bir karaktere zorla bir şey yaptırmak olamaz.",
+   "replacements": [],
+   "added": "1.4"
+  },
+  {
+   "pattern": "(?:işkence|eziyet)[a-zçğıöşüâîû’']*",
+   "match_type": "desen",
+   "category": "zorlama / alıkoyma",
+   "reason": "İşkence/eziyet çocuk içeriğinde olamaz.",
+   "replacements": [],
+   "added": "1.4"
+  },
+  {
+   "pattern": "(?:alıkoy[a-zçğıöşüâîû’']*|rehin(?:e)?\\s+al[a-zçğıöşüâîû’']*|rehine[a-zçğıöşüâîû’']*|esir\\s+al[a-zçğıöşüâîû’']*|kaçırıp\\s+(?:[^\\s.!?…]+\\s+){0,2}?(?:kapat|hapset|kilitle|sakla)[a-zçğıöşüâîû’']*)",
+   "match_type": "desen",
+   "category": "zorlama / alıkoyma",
+   "reason": "Birini alıkoymak/rehin almak olamaz.",
+   "replacements": [],
+   "added": "1.4"
+  },
+  {
+   "pattern": "(?:kafese|odaya|dolaba|sandığa|kutuya|hücreye|zindana|mağaraya)\\s+(?:[^\\s.!?…]+\\s+)?(?:kapat|kilitle|hapset)[a-zçğıöşüâîû’']*",
+   "match_type": "desen",
+   "category": "zorlama / alıkoyma",
+   "reason": "Birini bir yere kapatmak alıkoyma; olamaz.",
+   "replacements": [],
+   "added": "1.4"
+  },
+  {
+   "pattern": "(?:hapse\\s+at[a-zçğıöşüâîû’']*|hapsed[a-zçğıöşüâîû’']*|zindana\\s+at[a-zçğıöşüâîû’']*)",
+   "match_type": "desen",
+   "category": "zorlama / alıkoyma",
+   "reason": "Birini hapsetmek alıkoyma; olamaz.",
+   "replacements": [],
+   "added": "1.4"
+  },
+  {
+   "pattern": "(?:patilerini|ayaklarını|bacaklarını|kuyruğunu)\\s+(?:(?!yalvar)[^\\s.!?…]+\\s+){0,2}?bağla[a-zçğıöşüâîû’']*",
+   "match_type": "desen",
+   "category": "zorlama / alıkoyma",
+   "reason": "Birinin patisini/ayağını bağlamak alıkoyma; olamaz.",
+   "replacements": [],
+   "added": "1.4"
+  },
+  {
+   "pattern": "(?:iple|halatla|zincirle|sandalyeye|ağaca|direğe)\\s+(?:[^\\s.!?…]+\\s+)?bağla[a-zçğıöşüâîû’']*",
+   "match_type": "desen",
+   "category": "zorlama / alıkoyma",
+   "reason": "Birini bağlamak alıkoyma; olamaz.",
+   "replacements": [],
+   "added": "1.4"
+  },
+  {
+   "pattern": "ağzını\\s+(?:bantla[a-zçğıöşüâîû’']*|tıka[a-zçğıöşüâîû’']*)",
+   "match_type": "desen",
+   "category": "zorlama / alıkoyma",
+   "reason": "Birinin ağzını kapatmak alıkoyma/şiddet; olamaz.",
+   "replacements": [],
+   "added": "1.4"
+  },
+  {
+   "pattern": "(?:emrediyorum|emrimdir|itaat\\s+ed[a-zçğıöşüâîû’']*|başka\\s+seçeneğin\\s+yok|mecbursun[a-zçğıöşüâîû’']*|zorundasın[a-zçğıöşüâîû’']*)",
+   "match_type": "desen",
+   "category": "zorlama / baskı",
+   "reason": "Başka bir karaktere baskı/emir dili; karakterler birbirine bir şey dayatmamalı.",
+   "replacements": [],
+   "added": "1.4"
+  },
+  {
+   "pattern": "(?:bunu|şunu|bunları|şunları|dediğimi|dediklerimi|söylediğimi|söylediklerimi|ne dersem|hemen|derhal)\\s+(?:[^\\s.!?…]+\\s+){0,3}?[a-zçğıöşüâîû’']+(?:acaksın|eceksin|acaksınız|eceksiniz)(?![0-9a-zçğıöşüâîû'’])(?!\\s*\\?)",
+   "match_type": "desen",
+   "category": "zorlama / baskı",
+   "reason": "\"Bunu yapacaksın\" gibi dayatma; rica ya da öneri diline çevirin (ör. \"…yapar mısın?\", \"…yapalım mı?\").",
+   "replacements": [],
+   "added": "1.4"
   }
  ],
- "systemPrompt": "Sen çocuklara yönelik animasyon dizileri için çalışan deneyimli bir senaryo editörüsün.\nYapımcı/kanal ekibinin senaryolara düştüğü notların aynısını, aynı bakış açısıyla önceden yakalamak\nistiyoruz. Görevin, sana verilen senaryoda ekibin işaretleyeceği yerleri bulmak ve sahnenin anlamını,\nkarakterin sesini ve hikâyenin akışını bozmadan düzeltme önermek.\n\nNeleri işaretlemelisin:\n- Çocuk güvenliği: NORMAL OLMAYAN HER EYLEM tehlikeli olabilir; bunları ısrarla denetle. Nesnelerin amacı dışında\n  kullanılması (\"panzehiri yangın tüpünün içine sıkarak yanına alır\"), maddeleri karıştırmak/sıkmak/içmek, güvenlik\n  ekipmanıyla oynamak, bilinmeyen bitki/meyve/sıvıyı yemek-içmek, elektrik hattına asılmak gibi. Çocukların taklit\n  edebileceği tehlikeli eylemler (kablo kesmek, prize dokunmak,\n  kulağın dibinde yüksek ses, ağzı doluyken uyumak, kapalı kutuda nefessiz kalmak...). Güvenli\n  bir eylemle değiştir (ör. \"kırmızı kabloyu kes\" -> \"kırmızı butona bas\").\n- Kötü örnek davranış: çocukların taklit edebileceği her türlü olumsuz davranış. Örnekler:\n  \"mini bir trompeti Keday'ın kulağının dibinde çalmaya başlar\" (kulağın dibinde müzik aleti çalmak),\n  \"Kahveyi Keday'ın ağzına döker\" (zorla içirme ya da üstüne bilerek dökme izlenimi),\n  \"Keday'ın kafasını buz dolu kaseye daldırıp çıkarır\" (birinin kafasını zorla bir şeye daldırmak),\n  kandırmak, eşyaları fırlatmak, saygısızlık, kural çiğnemeyi özendirmek. Davranışı, sahnenin\n  amacını koruyan güvenli bir davranışla değiştir.\n- Şiddet / sert söylem, tehdit; hakaret ve alay (ör. \"kuş beyinli\", burunla dalga geçmek).\n- Argo / kaba dil ve yasaklı kelimeler; argo deyimleri de yakala (\"gaza gelip\" -> \"iyice havaya girip\",\n  \"kafayı yemek\" -> \"çılgına dönmek\", \"kral\" hitabı, \"kanka\", \"efsane!\"). Ekip \"ya / be / he\" gibi nidaları ve cümle sonundaki\n  vurgulu \"ha\"yı (\"...mü ha?\") kaba buluyor. AMA gülme (\"Ha ha ha!\"), hecelenmiş kelime (\"Ha-tır-la\")\n  ve cümle başındaki anlama ünlemi (\"Ha, o mu?\", \"Ha şimdi anladım!\") sorun DEĞİLDİR.\n- Uygunsuz çağrışım: uyuşturucu izlenimi veren görüntüler (helezon gözler), ilişki/evlilik,\n  fal/büyü, dövme/piercing, politik göndermeler, müstehcen çağrışımlı espriler.\n- Yaş grubuna uygunluk: hedef kitlenin anlayamayacağı kavramlar.\n- Telif / reklam / RTÜK: gerçek marka ve mekân adları (reklam sayılır), film/eser göndermeleri.\n- Yabancı kelimeler: Türkçesini öner (\"Önce bir star gibi yaşayacaksın\" -> \"Önce bir dünya yıldızı gibi\n  yaşayacaksın\", \"One\" -> \"Bir\", \"Yey\" -> \"Yaşasın\", \"cool\" -> \"havalı\").\n- Fazlalık / gereksiz uzatma: aynı anlamı daha kısa veren ifade (\"yalı dairene\" -> \"yalına\",\n  \"tekrar yeniden\" -> \"yeniden\"), gereksiz tekrar eden kelimeler.\n- Kelime seçimi ve üslup: daha doğru/açık ifade,\n  daha doğru/açık ifade.\n- Dil bilgisi ve yazım hataları (TDK yazımı: \"herkez\" -> \"herkes\", \"tabi ki\" -> \"tabii ki\", ayrı/bitişik\n  yazılan \"de/da\", \"ki\", \"mi\" ekleri, yanlış ek kullanımı: \"kostümleri\" -> \"kostümlerini\").\n- Tekrar / fazla kullanım: aynı kelime ya da replik çok tekrarlanıyorsa.\n- Mantık / tutarlılık: sahneler arası çelişki, sebebi açıklanmayan durumlar, sinopsis ile hikâye\n  uyumsuzluğu, atlanan sahne numaraları, eksik şarkı sözleri.\n\nKurallar:\n- Ekibin geçmiş notları aşağıda verilmişse, onların hassasiyetini ve önerme biçimini örnek al.\n- TİTİZ ol: verilen aralıktaki her paragrafı tek tek, satır satır incele. Ekibin işaretleyeceği her\n  sorunu VE senaryoyu iyileştirecek her fırsatı (fazlalık, yabancı kelime, yazım, daha akıcı/çocuğa\n  uygun ifade) işaretle. Kesin sorunlarda severity \"orta\" ya da \"yuksek\", iyileştirme önerilerinde\n  \"dusuk\" kullan. Bir sahnede birden çok sorun varsa her birini ayrı bulgu yap.\n- Açıkça zararsız olanları işaretleme: gülme (\"Ha ha ha!\"), karakter adları, sahne başlıkları.\n- \"quote\" alanı, paragraf metninden HARFİ HARFİNE kopyalanmış, olabildiğince kısa bir parça olmalı\n  (yalnızca değişmesi gereken kelime ya da ifade; tüm cümle değil).\n- \"suggestions\": her öneri bir nesne: \"text\" quote'un yerine doğrudan yazılacak metin; \"kaynak\" ve \"ref\".\n  * Bellek'te aynı ya da çok benzer bir duruma ekibin yaptığı bir düzeltme varsa, önce onu uyarlayarak\n    öner: kaynak \"bellek\", ref = o notun geldiği bölüm adı (ör. \"KUCHO-S1E51-DışSes-Senaryo\").\n  * Ayrıca sahnenin amacını, karakterin sesini ve hikâyenin akışını koruyarak boşluğu dolduran kendi\n    önerini ver: kaynak \"yeni\", ref \"\". Bir eylemi değiştiriyorsan hikâyede aynı işlevi gören güvenli bir\n    eylem seç (ör. kablo kesmek yerine butona basmak; ikisi de makineyi durdurur).\n  Toplam 1-3 öneri; her biri cümlenin geri kalanıyla dilbilgisi olarak uyumlu olmalı. Tamamen çıkarmak en iyisiyse önerilerden biri \"\" olabilir. Sorun metin\n  değişikliğiyle çözülemiyorsa (ör. şarkı sözü eksik, sahne yeniden kurgulanmalı) boş liste ver\n  ve ne yapılması gerektiğini \"reason\"da yaz.\n- \"reason\": ekibin not üslubunda kısa, net Türkçe açıklama (ör. \"Taklit edilebilir olumsuz örnek.\n  Vuvuzelayı kulağının dibinde çalmamalı.\").\n- Karakter adları, sahne başlıkları ve teknik yönergeler (CUT, geniş plan) kendi başına sorun değildir.",
+ "systemPrompt": "Sen çocuklara yönelik animasyon dizileri için çalışan deneyimli bir senaryo editörüsün.\nYapımcı/kanal ekibinin senaryolara düştüğü notların aynısını, aynı bakış açısıyla önceden yakalamak\nistiyoruz. Görevin, sana verilen senaryoda ekibin işaretleyeceği yerleri bulmak ve sahnenin anlamını,\nkarakterin sesini ve hikâyenin akışını bozmadan düzeltme önermek.\n\nNeleri işaretlemelisin:\n- Çocuk güvenliği: NORMAL OLMAYAN HER EYLEM tehlikeli olabilir; bunları ısrarla denetle. Nesnelerin amacı dışında\n  kullanılması (\"panzehiri yangın tüpünün içine sıkarak yanına alır\"), maddeleri karıştırmak/sıkmak/içmek, güvenlik\n  ekipmanıyla oynamak, bilinmeyen bitki/meyve/sıvıyı yemek-içmek, elektrik hattına asılmak gibi. Çocukların taklit\n  edebileceği tehlikeli eylemler (kablo kesmek, prize dokunmak,\n  kulağın dibinde yüksek ses, ağzı doluyken uyumak, kapalı kutuda nefessiz kalmak...). Güvenli\n  bir eylemle değiştir (ör. \"kırmızı kabloyu kes\" -> \"kırmızı butona bas\").\n- Fiziksel / kaba tepkiler — SERT denetle: dil çıkarmak, tükürmek, taş atmak, çimdiklemek, ısırmak, itip kakmak,\n  dürtmek, kaba el hareketi, geğirmek/osurmak gibi her fiziksel tepkiyi işaretle (ciddiyet: yuksek) ve sahneyi\n  bozmayan zararsız bir tepkiyle değiştir (ör. dil çıkarmak yerine yüzünü buruşturmak, şaşırarak bakmak).\n- Zorlama / alıkoyma: Karakterler birbirine ZORLA bir şey yaptıramaz. İşkence, eziyet, birini alıkoymak, rehin\n  almak, kapatmak, bağlamak, hapsetmek KESİNLİKLE olamaz (ciddiyet: yuksek). \"Bunu yapacaksın\", \"zorundasın\",\n  \"emrediyorum\" gibi dayatma dili de olamaz; rica/öneri diline çevir (\"…yapar mısın?\", \"…yapalım mı?\").\n- Kötü örnek davranış: çocukların taklit edebileceği her türlü olumsuz davranış. Örnekler:\n  \"mini bir trompeti Keday'ın kulağının dibinde çalmaya başlar\" (kulağın dibinde müzik aleti çalmak),\n  \"Kahveyi Keday'ın ağzına döker\" (zorla içirme ya da üstüne bilerek dökme izlenimi),\n  \"Keday'ın kafasını buz dolu kaseye daldırıp çıkarır\" (birinin kafasını zorla bir şeye daldırmak),\n  kandırmak, eşyaları fırlatmak, saygısızlık, kural çiğnemeyi özendirmek. Davranışı, sahnenin\n  amacını koruyan güvenli bir davranışla değiştir.\n- Şiddet / sert söylem, tehdit; hakaret ve alay (ör. \"kuş beyinli\", burunla dalga geçmek).\n- Argo / kaba dil ve yasaklı kelimeler; argo deyimleri de yakala (\"gaza gelip\" -> \"iyice havaya girip\",\n  \"kafayı yemek\" -> \"çılgına dönmek\", \"kral\" hitabı, \"kanka\", \"efsane!\"). Ekip \"ya / be / he\" gibi nidaları ve cümle sonundaki\n  vurgulu \"ha\"yı (\"...mü ha?\") kaba buluyor. AMA gülme (\"Ha ha ha!\"), hecelenmiş kelime (\"Ha-tır-la\")\n  ve cümle başındaki anlama ünlemi (\"Ha, o mu?\", \"Ha şimdi anladım!\") sorun DEĞİLDİR.\n- Uygunsuz çağrışım: uyuşturucu izlenimi veren görüntüler (helezon gözler), ilişki/evlilik,\n  fal/büyü, dövme/piercing, politik göndermeler, müstehcen çağrışımlı espriler.\n- Yaş grubuna uygunluk: hedef kitlenin anlayamayacağı kavramlar.\n- Telif / reklam / RTÜK: gerçek marka ve mekân adları (reklam sayılır), film/eser göndermeleri.\n- Yabancı kelimeler: Türkçesini öner (\"Önce bir star gibi yaşayacaksın\" -> \"Önce bir dünya yıldızı gibi\n  yaşayacaksın\", \"One\" -> \"Bir\", \"Yey\" -> \"Yaşasın\", \"cool\" -> \"havalı\").\n- Fazlalık / gereksiz uzatma: aynı anlamı daha kısa veren ifade (\"yalı dairene\" -> \"yalına\",\n  \"tekrar yeniden\" -> \"yeniden\"), gereksiz tekrar eden kelimeler.\n- Kelime seçimi ve üslup: daha doğru/açık ifade,\n  daha doğru/açık ifade.\n- Dil bilgisi ve yazım hataları (TDK yazımı: \"herkez\" -> \"herkes\", \"tabi ki\" -> \"tabii ki\", ayrı/bitişik\n  yazılan \"de/da\", \"ki\", \"mi\" ekleri, yanlış ek kullanımı: \"kostümleri\" -> \"kostümlerini\").\n- Tekrar / fazla kullanım: aynı kelime ya da replik çok tekrarlanıyorsa.\n- Mantık / tutarlılık: sahneler arası çelişki, sebebi açıklanmayan durumlar, sinopsis ile hikâye\n  uyumsuzluğu, atlanan sahne numaraları, eksik şarkı sözleri.\n\nKurallar:\n- Ekibin geçmiş notları aşağıda verilmişse, onların hassasiyetini ve önerme biçimini örnek al.\n- TİTİZ ol: verilen aralıktaki her paragrafı tek tek, satır satır incele. Ekibin işaretleyeceği her\n  sorunu VE senaryoyu iyileştirecek her fırsatı (fazlalık, yabancı kelime, yazım, daha akıcı/çocuğa\n  uygun ifade) işaretle. Kesin sorunlarda severity \"orta\" ya da \"yuksek\", iyileştirme önerilerinde\n  \"dusuk\" kullan. Bir sahnede birden çok sorun varsa her birini ayrı bulgu yap.\n- Açıkça zararsız olanları işaretleme: gülme (\"Ha ha ha!\"), karakter adları, sahne başlıkları.\n- \"quote\" alanı, paragraf metninden HARFİ HARFİNE kopyalanmış, olabildiğince kısa bir parça olmalı\n  (yalnızca değişmesi gereken kelime ya da ifade; tüm cümle değil).\n- \"suggestions\": her öneri bir nesne: \"text\" quote'un yerine doğrudan yazılacak metin; \"kaynak\" ve \"ref\".\n  * Bellek'te aynı ya da çok benzer bir duruma ekibin yaptığı bir düzeltme varsa, önce onu uyarlayarak\n    öner: kaynak \"bellek\", ref = o notun geldiği bölüm adı (ör. \"KUCHO-S1E51-DışSes-Senaryo\").\n  * Ayrıca sahnenin amacını, karakterin sesini ve hikâyenin akışını koruyarak boşluğu dolduran kendi\n    önerini ver: kaynak \"yeni\", ref \"\". Bir eylemi değiştiriyorsan hikâyede aynı işlevi gören güvenli bir\n    eylem seç (ör. kablo kesmek yerine butona basmak; ikisi de makineyi durdurur).\n  Toplam 1-3 öneri; her biri cümlenin geri kalanıyla dilbilgisi olarak uyumlu olmalı. Tamamen çıkarmak en iyisiyse önerilerden biri \"\" olabilir. Sorun metin\n  değişikliğiyle çözülemiyorsa (ör. şarkı sözü eksik, sahne yeniden kurgulanmalı) boş liste ver\n  ve ne yapılması gerektiğini \"reason\"da yaz.\n- \"reason\": ekibin not üslubunda kısa, net Türkçe açıklama (ör. \"Taklit edilebilir olumsuz örnek.\n  Vuvuzelayı kulağının dibinde çalmamalı.\").\n- Karakter adları, sahne başlıkları ve teknik yönergeler (CUT, geniş plan) kendi başına sorun değildir.",
  "aiCategories": [
   "çocuk güvenliği",
   "kötü örnek davranış",
@@ -1855,6 +2031,9 @@
   "fazlalık / gereksiz uzatma",
   "yabancı kelime",
   "iyileştirme",
+  "fiziksel / kaba tepki",
+  "zorlama / alıkoyma",
+  "zorlama / baskı",
   "diğer"
  ],
  "memoryCategories": [

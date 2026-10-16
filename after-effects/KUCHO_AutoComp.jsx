@@ -408,8 +408,23 @@
 
         var ids = {}, id, list = [];
         for (id in idx.comps) ids[id] = true;
-        if (opts.createMissing && job.scene !== null) {
-            for (id in db) if (db[id].key.s === job.scene) ids[id] = true;
+
+        // Sahne no klasör/.aep adından okunamadıysa projedeki plan comp'larından çıkar.
+        var scene = job.scene;
+        if (scene === null) {
+            var counts = {}, best = 0;
+            for (id in idx.comps) {
+                var sn = idx.comps[id] && parseKey(idx.comps[id].name, null);
+                if (!sn) continue;
+                counts[sn.s] = (counts[sn.s] || 0) + 1;
+                if (counts[sn.s] > best) { best = counts[sn.s]; scene = sn.s; }
+            }
+            if (scene !== null) log("  sahne no projedeki comp'lardan bulundu: S" + pad2(scene));
+        }
+
+        // Kaynaklarda olup projede comp'u olmayan planlar da işlenir (comp + klasör oluşturulur).
+        if (scene !== null) {
+            for (id in db) if (db[id].key.s === scene) ids[id] = true;
         }
         for (id in ids) list.push(id);
         list.sort();
@@ -518,11 +533,10 @@
         cbBg.value = getSetting("bgLayer", "true") === "true";
         var cbAn = pOpt.add("checkbox", undefined, "Animatic'i comp'a guide layer olarak ekle (render'a girmez)");
         cbAn.value = getSetting("animToComp", "true") === "true";
-        var cbNew = pOpt.add("checkbox", undefined, "Projede olmayan planlar için comp + klasör oluştur");
-        cbNew.value = getSetting("createMissing", "true") === "true";
         var cbBk = pOpt.add("checkbox", undefined, "İşlemeden önce .aep yedeği al (_backup klasörüne)");
         cbBk.value = getSetting("backup", "true") === "true";
         pOpt.add("statictext", undefined, "Comp ayarları her zaman 1920x1080 / 25 FPS olarak düzeltilir.");
+        pOpt.add("statictext", undefined, "Projede comp'u olmayan planlar için comp + klasör otomatik oluşturulur.");
 
         var gB = w.add("group");
         gB.alignment = ["right", "top"];
@@ -582,7 +596,6 @@
             setSetting("scale", sc);
             setSetting("bgLayer", cbBg.value);
             setSetting("animToComp", cbAn.value);
-            setSetting("createMissing", cbNew.value);
             setSetting("backup", cbBk.value);
 
             result = {
@@ -591,7 +604,7 @@
                 bg: eBg.text ? new Folder(eBg.text) : null,
                 scenes: eSc.text ? new Folder(eSc.text) : null,
                 anim: eAn.text ? new Folder(eAn.text) : null,
-                opts: { scale: sc, bgToComp: cbBg.value, animToComp: cbAn.value, createMissing: cbNew.value, backup: cbBk.value }
+                opts: { scale: sc, bgToComp: cbBg.value, animToComp: cbAn.value, backup: cbBk.value }
             };
             w.close(1);
         };

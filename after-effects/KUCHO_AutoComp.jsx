@@ -5,7 +5,7 @@
 
         02KU01\
             01_COMPOSITING\<sahne klasörü>\*.aep      -> açılacak AE projeleri
-            02_BACKGROUND\...\02KU01_S02_P03_XXX.png  -> plan klasörüne atılır
+            02_BACKGROUND\...\02KU01_S02_P03_XXX.png  -> plan klasörüne + comp'un en altına (kendi scale'i)
             03_SCENES_\...\<plan klasörü>\renderlar   -> plan klasörüne + comp'a (scale %52)
             06_ANIMATIC\...\02KU01_S02_P03.mov        -> plan klasörüne (+ istenirse comp'a guide layer)
 
@@ -363,14 +363,13 @@
             nSc++;
         }
 
-        // BG: istenirse comp'un en altına.
+        // BG: comp'un en altına, kendi scale'inde (dokunulmaz).
         var nBg = 0;
         if (opts.bgToComp) {
             for (i = 0; i < bgItems.length; i++) {
                 l = addLayer(comp, bgItems[i]);
                 if (!l) continue;
                 l.moveToEnd();
-                setScale(l, opts.scale);
                 nBg++;
             }
         }
@@ -515,8 +514,8 @@
         gS.add("statictext", undefined, "SCENES render scale (%):");
         var eScale = gS.add("edittext", undefined, getSetting("scale", "52"));
         eScale.preferredSize.width = 50;
-        var cbBg = pOpt.add("checkbox", undefined, "BG png'lerini comp'a da layer olarak ekle (en alta, aynı scale ile)");
-        cbBg.value = getSetting("bgToComp", "false") === "true";
+        var cbBg = pOpt.add("checkbox", undefined, "BG png'lerini comp'a da layer olarak ekle (en alta, kendi scale'inde)");
+        cbBg.value = getSetting("bgLayer", "true") === "true";
         var cbAn = pOpt.add("checkbox", undefined, "Animatic'i comp'a guide layer olarak ekle (render'a girmez)");
         cbAn.value = getSetting("animToComp", "true") === "true";
         var cbNew = pOpt.add("checkbox", undefined, "Projede olmayan planlar için comp + klasör oluştur");
@@ -581,7 +580,7 @@
             setSetting("scenes", eSc.text);
             setSetting("anim", eAn.text);
             setSetting("scale", sc);
-            setSetting("bgToComp", cbBg.value);
+            setSetting("bgLayer", cbBg.value);
             setSetting("animToComp", cbAn.value);
             setSetting("createMissing", cbNew.value);
             setSetting("backup", cbBk.value);

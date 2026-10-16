@@ -9,3 +9,13 @@ frontend/.next/
 frontend/out/
 .node/
 .node-tmp/
+
+# Gizli anahtarlar depoya girmesin (anahtarlar .env ya da Ayarlar sayfasında tutulur)
+API KEY
+API KEY*
+API_KEY*
+api-key*
+*apikey*
+*.key
+.env.*
+!.env.example
